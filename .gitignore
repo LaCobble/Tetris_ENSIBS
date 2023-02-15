@@ -2,3 +2,5 @@ dev/*.iml
 prod/*.iml
 dev/*.idea
 prod/*.idea
+dev/*.xml
+prod/*.xml
