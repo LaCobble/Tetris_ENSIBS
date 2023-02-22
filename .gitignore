@@ -4,3 +4,4 @@ dev/*.idea
 prod/*.idea
 dev/*.xml
 prod/*.xml
+*.xml
