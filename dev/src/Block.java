@@ -1,6 +1,6 @@
 import java.awt.Color;
 public class Block {
-    public Color color;
+    private Color color;
 
     public void setColor(Color color){
         this.color = color;

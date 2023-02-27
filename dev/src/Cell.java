@@ -1,7 +1,7 @@
 import java.awt.Color;
 public class Cell {
-    public Boolean occupied = false;
-    public Color color;
+    private Boolean occupied = false;
+    private Color color;
 
     public Color getColor(){
         return color;
