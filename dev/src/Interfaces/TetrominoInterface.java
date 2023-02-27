@@ -14,6 +14,8 @@ public interface TetrominoInterface {
 
     void moveRight();
 
+    void moveDown();
+
     void rotate();
 
     void fall();
@@ -25,4 +27,8 @@ public interface TetrominoInterface {
     TetrominoTypeInterface getTetrominoType();
 
     int getRotation();
+
+    void rotateClockwise();
+
+    void rotateCounterClockwise();
 }
