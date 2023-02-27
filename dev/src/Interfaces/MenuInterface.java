@@ -5,5 +5,7 @@ public interface MenuInterface {
     void hide();
     void startGame();
     void displayHighScore();
+    void displayOptions();
+    void quitGame();
 
 }

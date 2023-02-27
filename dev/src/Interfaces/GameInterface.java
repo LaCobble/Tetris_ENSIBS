@@ -9,4 +9,7 @@ public interface GameInterface {
     void saveBestScore();
     void pause();
     void resume();
+    void displayCredits();
+    void setScore();
+    void getScore();
 }
