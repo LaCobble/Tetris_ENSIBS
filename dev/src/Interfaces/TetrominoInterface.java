@@ -14,8 +14,6 @@ public interface TetrominoInterface {
 
     void moveRight();
 
-    void moveDown();
-
     void rotate();
 
     void fall();

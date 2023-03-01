@@ -15,7 +15,7 @@ public interface TetrisBoardInterface {
 
     void addTetris();
 
-    TetrominoInterface generateTrominoOrder();
+    TetrominoInterface[] generateTrominoOrder();
 
     Integer generationBalancedRandomNumbers();
 
