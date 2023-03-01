@@ -1,80 +1,35 @@
 import java.io.*;
 import java.util.*;
 
+// a csv file with the 10 best scores and the name of the player, write the score if it is in the top 10, and read the scores from the file to display them in the game
 public class HighScoreManager {
-    private static final String CSV_FILE_PATH = "highscores.csv";
-    private static final int MAX_HIGHSCORES = 3;
+    private static final String CSV_FILE_PATH = "Files/highscores.csv";
+    private static final int MAX_SCORES = 10;
 
-    // Get the best score with the given nickname
-    public static int getBestScore(String nickname) {
-        int bestScore = 0;
+    public static void writeScore(String name, int score) throws IOException {
+        List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] fields = line.split(",");
-                if (fields[0].equals(nickname)) {
-                    int score = Integer.parseInt(fields[1]);
-                    if (score > bestScore) {
-                        bestScore = score;
-                    }
-                }
+                lines.add(line);
             }
-        } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
         }
-        return bestScore;
-    }
-
-    // Write a score and its nickname to the document
-    public static void writeScore(String nickname, int score) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_FILE_PATH, true))) {
-            writer.write(nickname + "," + score + "\n");
-        } catch (IOException e) {
-            System.err.println("Error writing file: " + e.getMessage());
+        lines.add(name + "," + score);
+        lines.sort((s1, s2) -> Integer.compare(Integer.parseInt(s2.split(",")[1]), Integer.parseInt(s1.split(",")[1])));
+        if (lines.size() > MAX_SCORES) {
+            lines = lines.subList(0, MAX_SCORES);
         }
-    }
-
-    // Get the top N scores with their nicknames
-    public static Map<String, Integer> getTopScores(int n) {
-        Map<String, Integer> topScores = new HashMap<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] fields = line.split(",");
-                String nickname = fields[0];
-                int score = Integer.parseInt(fields[1]);
-                if (topScores.size() < n) {
-                    topScores.put(nickname, score);
-                } else {
-                    for (Map.Entry<String, Integer> entry : topScores.entrySet()) {
-                        if (score > entry.getValue()) {
-                            topScores.remove(entry.getKey());
-                            topScores.put(nickname, score);
-                            break;
-                        }
-                    }
-                }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_FILE_PATH))) {
+            for (String line : lines) {
+                writer.write(line);
+                writer.newLine();
             }
-        } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
-        }
-        return topScores;
-    }
-
-    public static void main(String[] args) {
-        // Example usage
-        writeScore("Alice", 100);
-        writeScore("Bob", 200);
-        writeScore("Charlie", 300);
-        writeScore("David", 400);
-
-        int bestScore = getBestScore("Charlie");
-        System.out.println("Best score for Charlie: " + bestScore);
-
-        Map<String, Integer> topScores = getTopScores(MAX_HIGHSCORES);
-        System.out.println("Top " + MAX_HIGHSCORES + " scores:");
-        for (Map.Entry<String, Integer> entry : topScores.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
         }
     }
+
+    // main method to test the class
+    public static void main(String[] args) throws IOException {
+        writeScore("Kie", 400);
+    }
+
 }

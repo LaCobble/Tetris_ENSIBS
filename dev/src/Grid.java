@@ -1,4 +1,5 @@
 import javax.xml.crypto.dsig.keyinfo.KeyInfo;
+import Interfaces.GridInterface;
 
 public class Grid {
     public Cell[][] cells;
