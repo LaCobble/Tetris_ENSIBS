@@ -1,4 +1,5 @@
 import java.awt.Color;
+import Interfaces.BlockInterface;
 public class Block {
     private Color color;
 

@@ -1,4 +1,5 @@
 import java.awt.Color;
+import Interfaces.CellInterface;
 public class Cell {
     private Boolean occupied = false;
     private Color color;
