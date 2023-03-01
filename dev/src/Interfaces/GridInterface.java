@@ -5,5 +5,4 @@ public interface GridInterface {
     Integer getDimension();
     Integer getX();
     Integer getY();
-    TetrominoTypeInterface getTypeTetromino();
 }

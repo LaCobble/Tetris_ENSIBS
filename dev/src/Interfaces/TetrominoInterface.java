@@ -1,5 +1,7 @@
 package Interfaces;
 
+import Enum.TetrominoType;
+
 public interface TetrominoInterface {
 
     boolean canMoveLeft();
@@ -14,6 +16,8 @@ public interface TetrominoInterface {
 
     void moveRight();
 
+    void moveDown();
+
     void rotate();
 
     void fall();
@@ -22,7 +26,7 @@ public interface TetrominoInterface {
 
     void getY();
 
-    TetrominoTypeInterface getTetrominoType();
+    TetrominoType getTetrominoType();
 
     int getRotation();
 

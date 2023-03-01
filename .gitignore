@@ -5,3 +5,5 @@ prod/*.idea
 dev/*.xml
 prod/*.xml
 *.xml
+dev/out
+
