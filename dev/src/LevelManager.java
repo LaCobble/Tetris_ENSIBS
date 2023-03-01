@@ -5,8 +5,8 @@ public class LevelManager {
     private static LevelManager instance = null;
     private int speed;
     private int score;
-    private int speedCoefficient;
-    private int scoreCoefficient;
+    private float speedCoefficient;
+    private float scoreCoefficient;
 
     private LevelManager() {
         speed = 1;
@@ -38,7 +38,7 @@ public class LevelManager {
         this.score = score;
     }
 
-    public int getSpeedCoefficient() {
+    public float getSpeedCoefficient() {
         return speedCoefficient;
     }
 
@@ -46,7 +46,7 @@ public class LevelManager {
         this.speedCoefficient = speedCoefficient;
     }
 
-    public int getScoreCoefficient() {
+    public float getScoreCoefficient() {
         return scoreCoefficient;
     }
 
@@ -63,21 +63,21 @@ public class LevelManager {
 
     // easy level
     public void easyLevel() {
-        speedCoefficient = 1.1;
-        scoreCoefficient = 1.1;
+        speedCoefficient = 1.1F;
+        scoreCoefficient = 1.1F;
     }
 
     // normal level
     public void normalLevel() {
-        speedCoefficient = 1.3;
-        scoreCoefficient = 1.3;
+        speedCoefficient = 1.3F;
+        scoreCoefficient = 1.3F;
     }
 
 
     // hard level
     public void hardLevel() {
-        speedCoefficient = 1.5  ;
-        scoreCoefficient = 1.5;
+        speedCoefficient = 1.5F;
+        scoreCoefficient = 1.5F;
     }
 
 
