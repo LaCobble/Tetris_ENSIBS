@@ -10,7 +10,7 @@ public interface TetrominoInterface {
 
     boolean canRotate();
 
-    boolean canFall();
+    boolean canMoveDown();
 
     void moveLeft();
 
@@ -21,10 +21,6 @@ public interface TetrominoInterface {
     void rotate();
 
     void fall();
-
-    void getX();
-
-    void getY();
 
     TetrominoType getTetrominoType();
 

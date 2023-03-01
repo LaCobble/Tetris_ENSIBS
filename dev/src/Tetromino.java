@@ -1,6 +1,7 @@
 import Enum.TetrominoType;
 import Interfaces.TetrominoInterface;
 
+import javax.swing.text.Position;
 import java.awt.*;
 
 public class Tetromino implements TetrominoInterface {
@@ -78,12 +79,17 @@ public class Tetromino implements TetrominoInterface {
     }
 
     @Override
-    public boolean canRotate() {
-        return false;
+    public boolean canMoveDown() {
+        for (Point p : positions) {
+            if (p.getY() == 9) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
-    public boolean canFall() {
+    public boolean canRotate() {
         return false;
     }
 
@@ -116,16 +122,6 @@ public class Tetromino implements TetrominoInterface {
 
     @Override
     public void fall() {
-
-    }
-
-    @Override
-    public void getX() {
-
-    }
-
-    @Override
-    public void getY() {
 
     }
 
