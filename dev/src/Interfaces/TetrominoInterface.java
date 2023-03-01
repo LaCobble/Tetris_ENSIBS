@@ -8,9 +8,11 @@ public interface TetrominoInterface {
 
     boolean canMoveRight();
 
-    boolean canRotate();
-
     boolean canMoveDown();
+
+    boolean canRotateClockwise();
+
+    boolean canRotateCounterClockwise();
 
     void moveLeft();
 
@@ -18,15 +20,11 @@ public interface TetrominoInterface {
 
     void moveDown();
 
-    void rotate();
+    void rotateClockwise();
 
-    void fall();
+    void rotateCounterClockwise();
 
     TetrominoType getTetrominoType();
 
     int getRotation();
-
-    void rotateClockwise();
-
-    void rotateCounterClockwise();
 }

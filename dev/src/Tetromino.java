@@ -70,18 +70,9 @@ public class Tetromino implements TetrominoInterface {
 
     @Override
     public boolean canMoveLeft() {
-        return false;
-    }
-
-    @Override
-    public boolean canMoveRight() {
-        return false;
-    }
-
-    @Override
-    public boolean canMoveDown() {
         for (Point p : positions) {
-            if (p.getY() == 9) {
+            if (p.getX() == 0) {
+                System.out.println("Tetromino cannot move left.");
                 return false;
             }
         }
@@ -89,50 +80,62 @@ public class Tetromino implements TetrominoInterface {
     }
 
     @Override
-    public boolean canRotate() {
+    public boolean canMoveRight() {
+        for (Point p : positions) {
+            if (p.getX() == 9) {
+                System.out.println("Tetromino cannot move right.");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean canMoveDown() {
+        for (Point p : positions) {
+            if (p.getY() == 9) {
+                System.out.println("Tetromino cannot move down.");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean canRotateClockwise() {
+        return false;
+    }
+
+    @Override
+    public boolean canRotateCounterClockwise() {
         return false;
     }
 
     @Override
     public void moveLeft() {
-        for (Point p : positions) {
-            p.setX(p.getX() - 1);
+        if (canMoveLeft()) {
+            for (Point p : positions) {
+                p.setX(p.getX() - 1);
+            }
         }
     }
 
     @Override
     public void moveRight() {
-        for (Point p : positions) {
-            p.setX(p.getX() + 1);
+        if (canMoveRight()) {
+            for (Point p : positions) {
+                p.setX(p.getX() + 1);
+            }
         }
     }
 
     @Override
     public void moveDown() {
-        for (Point p : positions) {
-            p.setY(p.getY() - 1);
+        if (canMoveDown()) {
+            for (Point p : positions) {
+                p.setY(p.getY() - 1);
+            }
         }
-    }
-
-    @Override
-    public void rotate() {
-        assert this.canRotate();
-
-    }
-
-    @Override
-    public void fall() {
-
-    }
-
-    @Override
-    public TetrominoType getTetrominoType() {
-        return type;
-    }
-
-    @Override
-    public int getRotation() {
-        return 0;
     }
 
     @Override
@@ -143,5 +146,15 @@ public class Tetromino implements TetrominoInterface {
     @Override
     public void rotateCounterClockwise() {
 
+    }
+
+    @Override
+    public TetrominoType getTetrominoType() {
+        return type;
+    }
+
+    @Override
+    public int getRotation() {
+        return rotation;
     }
 }
