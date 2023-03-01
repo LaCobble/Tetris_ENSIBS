@@ -45,7 +45,7 @@ public class Game {
         System.out.println("Choose a name");
         String text = scan.nextLine();
         scan.close();
-        
+
         }
     }
     
@@ -74,5 +74,9 @@ public class Game {
 
     public int getScore() {
         return score;
+    }
+
+    public Boolean isRunning() {
+        return isRunning;
     }
 }
