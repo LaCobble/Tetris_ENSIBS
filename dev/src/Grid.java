@@ -1,12 +1,8 @@
-import javax.xml.crypto.dsig.keyinfo.KeyInfo;
-import Interfaces.GridInterface;
-
 public class Grid {
     public Cell[][] cells;
     private Integer dimension;
     private Integer x;
     private Integer y;
-    private TetrominoType typeTetromino;
 
     public Integer getDimension() {
         return dimension;
@@ -32,11 +28,4 @@ public class Grid {
         this.y = y;
     }
 
-    public TetrominoType getTypeTetromino() {
-        return typeTetromino;
-    }
-
-    public void setTypeTetromino(TetrominoType typeTetromino) {
-        this.typeTetromino = typeTetromino;
-    }
 }
