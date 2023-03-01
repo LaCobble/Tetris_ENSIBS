@@ -5,7 +5,7 @@ public class Game {
     private Tetromino currentTetromino;
     private int score;
     private int highScore;
-    public boolean isRunning;
+    private boolean isRunning;
 
     public void start() {
         // Pré-condition: Le jeu n'est pas en cours d'exécution
@@ -74,5 +74,9 @@ public class Game {
 
     public int getScore() {
         return score;
+    }
+
+    public Boolean isRunning() {
+        return isRunning;
     }
 }
