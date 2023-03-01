@@ -11,8 +11,6 @@ public interface TetrisBoardInterface {
 
     void updateSpeed();
 
-    boolean isPause();
-
     void addTetris();
 
     TetrominoInterface[] generateTrominoOrder();

@@ -12,7 +12,7 @@ public class Game {
         if (!isRunning) {
             // Initialiser le plateau de jeu et un Tetromino
             tetrisBoard = new TetrisBoard();
-            currentTetromino = Tetromino.getRandomTetromino();
+            //currentTetromino = TetrisBoard.addTetris();
             isRunning = true;
         }
         // Post-condition: Le jeu est maintenant en cours d'exécution
