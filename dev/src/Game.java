@@ -23,7 +23,7 @@ public class Game {
         // Pré-condition: Le jeu est en cours d'exécution
         assert(isRunning);
         isRunning = false;
-        tetrisBoard.speed = 0;
+        tetrisBoard.setSpeed(0);
         // Post-condition: Le jeu n'est plus en cours d'exécution
         assert(!isRunning);
     }
@@ -58,7 +58,7 @@ public class Game {
         // Pré-condition: Le jeu n'est pas en cours d'exécution
         assert(!isRunning);
         isRunning = true;
-        tetrisBoard.speed = 1;
+        tetrisBoard.setSpeed(1);
         // Post-condition: Le jeu est maintenant en cours d'exécution
         assert(isRunning);
     }
@@ -76,7 +76,11 @@ public class Game {
         return score;
     }
 
-    public Boolean isRunning() {
+    public Boolean getisRunning() {
         return isRunning;
+    }
+
+    public void setisRunning(Boolean bool){
+        this.isRunning = bool;
     }
 }
