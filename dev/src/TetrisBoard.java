@@ -35,11 +35,6 @@ public class TetrisBoard implements TetrisBoardInterface {
 
     }
 
-    @Override
-    public boolean isRunning() {
-
-        return isRunning;
-    }
 
     @Override
     public void addTetris() {
@@ -74,5 +69,13 @@ public class TetrisBoard implements TetrisBoardInterface {
     @Override
     public void aside() {
 
+    }
+
+    public Integer getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Integer speed) {
+        this.speed = speed;
     }
 }
