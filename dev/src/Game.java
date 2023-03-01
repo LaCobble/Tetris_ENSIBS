@@ -5,7 +5,7 @@ public class Game {
     private Tetromino currentTetromino;
     private int score;
     private int highScore;
-    private boolean isRunning;
+    public boolean isRunning;
 
     public void start() {
         // Pré-condition: Le jeu n'est pas en cours d'exécution
@@ -45,7 +45,7 @@ public class Game {
         System.out.println("Choose a name");
         String text = scan.nextLine();
         scan.close();
-        
+
         }
     }
     
