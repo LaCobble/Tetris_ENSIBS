@@ -16,55 +16,55 @@ public class Tetromino implements TetrominoInterface {
 
     public Tetromino(TetrominoType type) {
         switch (type) {
-            case Z:
+            case Z -> {
                 color = Color.red;
                 positions[0] = new Point(3, 0);
                 positions[1] = new Point(4, 0);
                 positions[2] = new Point(4, 1);
                 positions[3] = new Point(5, 1);
-                break;
-            case L:
+            }
+            case L -> {
                 color = Color.orange;
                 positions[0] = new Point(3, 1);
                 positions[1] = new Point(4, 1);
                 positions[2] = new Point(5, 1);
                 positions[3] = new Point(5, 0);
-                break;
-            case O:
+            }
+            case O -> {
                 color = Color.yellow;
                 positions[0] = new Point(4, 0);
                 positions[1] = new Point(5, 0);
                 positions[2] = new Point(4, 1);
                 positions[3] = new Point(5, 1);
-                break;
-            case S:
+            }
+            case S -> {
                 color = Color.green;
                 positions[0] = new Point(3, 1);
                 positions[1] = new Point(4, 1);
                 positions[2] = new Point(4, 0);
                 positions[3] = new Point(5, 0);
-                break;
-            case I:
+            }
+            case I -> {
                 color = Color.cyan;
                 positions[0] = new Point(3, 0);
                 positions[1] = new Point(4, 0);
                 positions[2] = new Point(5, 0);
                 positions[3] = new Point(6, 0);
-                break;
-            case J:
+            }
+            case J -> {
                 color = Color.blue;
                 positions[0] = new Point(3, 0);
                 positions[1] = new Point(3, 1);
                 positions[2] = new Point(4, 1);
                 positions[3] = new Point(5, 1);
-                break;
-            case T:
+            }
+            case T -> {
                 color = Color.magenta;
                 positions[0] = new Point(3, 0);
                 positions[1] = new Point(4, 0);
                 positions[2] = new Point(5, 0);
                 positions[3] = new Point(4, 1);
-                break;
+            }
         }
     }
 
