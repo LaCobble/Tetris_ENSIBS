@@ -3,7 +3,7 @@ import java.util.*;
 
 // a csv file with the 10 best scores and the name of the player, write the score if it is in the top 10, and read the scores from the file to display them in the game
 public class HighScoreManager {
-    private static final String CSV_FILE_PATH = "highscores.csv";
+    private static final String CSV_FILE_PATH = "Files/highscores.csv";
     private static final int MAX_SCORES = 10;
 
     public static void writeScore(String name, int score) throws IOException {
@@ -25,6 +25,11 @@ public class HighScoreManager {
                 writer.newLine();
             }
         }
+    }
+
+    // main method to test the class
+    public static void main(String[] args) throws IOException {
+        writeScore("Kie", 400);
     }
 
 }
