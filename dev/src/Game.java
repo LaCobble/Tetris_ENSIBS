@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Game {
     private TetrisBoard tetrisBoard;
     private Tetromino currentTetromino;
@@ -21,6 +23,7 @@ public class Game {
         // Pré-condition: Le jeu est en cours d'exécution
         assert(isRunning);
         isRunning = false;
+        tetrisBoard.speed = 0;
         // Post-condition: Le jeu n'est plus en cours d'exécution
         assert(!isRunning);
     }
@@ -38,7 +41,11 @@ public class Game {
     public void updateHighScore() {
         if (score > highScore) {
             highScore = score;
-
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Choose a name");
+        String text = scan.nextLine();
+        scan.close();
+        
         }
     }
     
@@ -48,11 +55,17 @@ public class Game {
 
 
     public void resume(){
-        // remove the pause screen and restart the movement
+        // Pré-condition: Le jeu n'est pas en cours d'exécution
+        assert(!isRunning);
+        isRunning = true;
+        tetrisBoard.speed = 1;
+        // Post-condition: Le jeu est maintenant en cours d'exécution
+        assert(isRunning);
     }
 
     public void displayCredits(){
-
+        System.out.println("This game was created by this awesome squad:");
+        System.out.println("Maucourt Pierre-Yves - Latour Morgan - Saudemont Thomas - Ben Nasrallah Ahmed");
     }
 
     public void setScore(int score) {
