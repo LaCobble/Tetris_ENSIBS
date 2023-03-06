@@ -5,15 +5,33 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+/**
+ *
+ * @author Cyberlog - Groupe 2
+ * @version 1.0
+ * This class is the board of the game
+ */
 public class TetrisBoard implements TetrisBoardInterface {
+
+    // The grid of the game
     private Grid grid;
+
+    // The score of the game
     private Integer lineCompleted;
+
+    // The number of tetris
     private boolean pause;
+
+    // The type of tetromino
     private final TetrominoType[] tetrominoOrder = TetrominoType.values();
+
+    //
     private Integer order;
+
+    // Tetromino aside
     private Tetromino asideTetromino;
 
-
+    
     @Override
     public void update() {
 
