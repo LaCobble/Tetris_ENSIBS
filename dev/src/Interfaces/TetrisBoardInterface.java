@@ -1,5 +1,8 @@
 package Interfaces;
+
 import Enum.TetrominoType;
+
+
 
 public interface TetrisBoardInterface {
     void update();
@@ -17,9 +20,9 @@ public interface TetrisBoardInterface {
 
     int generationBalancedRandomNumbers();
 
-    TetrominoType getActualTetromino();
+    TetrominoInterface getActualTetromino();
 
-    TetrominoType getNextTetromino();
+    TetrominoInterface getNextTetromino();
 
     void fall();
 

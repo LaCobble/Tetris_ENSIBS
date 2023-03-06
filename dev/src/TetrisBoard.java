@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+
 /**
  *
  * @author Cyberlog - Groupe 2
@@ -23,7 +24,8 @@ public class TetrisBoard implements TetrisBoardInterface {
     private boolean pause;
 
     // The type of tetromino
-    private final TetrominoType[] tetrominoOrder = TetrominoType.values();
+    private List<Tetromino> tetrominoOrder;
+
 
     //
     private Integer order;
@@ -90,15 +92,13 @@ public class TetrisBoard implements TetrisBoardInterface {
     }
 
     @Override
-    public TetrominoType getActualTetromino() {
-        TetrominoType element = tetrominoOrder[generationBalancedRandomNumbers()];
-        return element;
+    public Tetromino getActualTetromino() {
+        return tetrominoOrder.get(generationBalancedRandomNumbers());
     }
 
     @Override
-    public TetrominoType getNextTetromino() {
-        TetrominoType element = tetrominoOrder[generationBalancedRandomNumbers()];
-        return element;
+    public Tetromino getNextTetromino() {
+        return tetrominoOrder.get(generationBalancedRandomNumbers());
     }
 
     @Override
@@ -109,6 +109,12 @@ public class TetrisBoard implements TetrisBoardInterface {
     @Override
     public void aside() {
 
+    }
+
+    public void setTetrominoOrder(){
+        for (TetrominoType i : TetrominoType.values()){
+            tetrominoOrder.add(new Tetromino(i));
+        }
     }
 
 }
