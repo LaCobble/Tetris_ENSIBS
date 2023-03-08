@@ -2,6 +2,8 @@ package Interfaces;
 
 import Enum.TetrominoType;
 
+import java.awt.*;
+
 public interface TetrominoInterface {
 
     boolean canMoveLeft();
@@ -27,4 +29,5 @@ public interface TetrominoInterface {
     TetrominoType getTetrominoType();
 
     int getRotation();
+    Color getColor();
 }

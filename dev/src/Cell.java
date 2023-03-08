@@ -1,5 +1,7 @@
 import java.awt.Color;
+import Enum.TetrominoType;
 import Interfaces.CellInterface;
+
 
 /**
  *
@@ -12,10 +14,18 @@ public class Cell {
 
     // Attributes
     // The cell is occupied or not
-    private Boolean occupied = false;
+    private Boolean occupied;
 
     // The color of the cell
     private Color color;
+
+    private Point point;
+
+    public Cell(Tetromino tetromino,int x, int y) {
+        this.color = tetromino.getColor();
+        this.occupied = true;
+        this.point = new Point(x,y);
+    }
 
     /**
      * getter of the cell color
@@ -27,7 +37,7 @@ public class Cell {
 
     /**
      * setter of the cell state
-     * @param state of the cell
+     * @param occupied of the cell
      */
     public void setOccupied(Boolean occupied){
         this.occupied = occupied;
@@ -49,4 +59,18 @@ public class Cell {
         this.color=color;
     }
 
+    /**
+     * getter of the cell point
+     * @return the point of the cell
+     */
+    public Point getPoint() {
+        return point;
+    }
+    /**
+     * setter of the cell point
+     * @param point of the cell
+     */
+    public void setPoint(Point point) {
+        this.point = point;
+    }
 }

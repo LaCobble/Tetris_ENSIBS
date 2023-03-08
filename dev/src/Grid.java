@@ -10,12 +10,12 @@ public class Grid {
     // The grid is a 2D array of cells
     private Cell[][] grid;
 
-    private int dimensionX;
-    private int dimensionY;
-    private int x;
-    private int y;
+    private Cell cell;
 
-    public Grid(int dimensionX, int dimensionY){
+    private int dimensionX = 10;
+    private int dimensionY = 20;
+
+    public Grid(){
         grid = new Cell[dimensionX][dimensionY];
     }
     /**
@@ -43,37 +43,7 @@ public class Grid {
     }
 
     /**
-     * getter for x
-     * @return x int
-     */
-    public int getX() {
-        return x;
-    }
-    /**
-     * getter for y
-     * @return y int
-     */
-    public int getY() {
-        return y;
-    }
-
-    /**
-     * setter for x
-     * @param x int
-     */
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    /**
-     * setter for y
-     * @param y int
-     */
-    public void setY(int y) {
-        this.y = y;
-    }
-    /**
-     * getter for y
+     * getter for grid
      * @return grid Cell[][]
      */
 
@@ -81,4 +51,10 @@ public class Grid {
         return grid;
     }
 
+    public void addCell(Tetromino tetromino,int x, int y ){
+        assert (dimensionX >= x && x >= 0);
+        assert (dimensionY >= y && y >= 0);
+        cell = new Cell(tetromino,x,y);
+        grid[x][y] = cell;
+    }
 }
