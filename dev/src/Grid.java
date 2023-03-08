@@ -68,7 +68,6 @@ public class Grid {
         this.x = x;
     }
 
-
     /**
      * getter for y
      * @return y integer

@@ -34,16 +34,17 @@ public class TetrisBoard implements TetrisBoardInterface {
     private Tetromino asideTetromino;
 
 
+
     public TetrisBoard() {
         grid = new Grid(4, 4);
 
     }
 
 
+
     /**
      * refresh the board
      */
-
     @Override
     public void update() {
 
@@ -70,6 +71,16 @@ public class TetrisBoard implements TetrisBoardInterface {
      * allow to clear a line
      */
     @Override
+    public void clearLine() {
+
+    }
+
+    /**
+     * allow to add a tetris
+     */
+    @Override
+    public void addTetris() {
+
 
     public void clearLine(int y) {
         Cell[][] gride = grid.getGrid();
@@ -78,10 +89,6 @@ public class TetrisBoard implements TetrisBoardInterface {
         }
     }
 
-    @Override
-    public TetrominoInterface[] generateTrominoOrder() {
-        return null;
-    }
 
     /**
      * swap
