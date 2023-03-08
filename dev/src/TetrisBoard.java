@@ -32,9 +32,7 @@ public class TetrisBoard implements TetrisBoardInterface {
     // Tetromino aside
     private Tetromino asideTetromino;
 
-    public TetrisBoard(Grid grid) {
-        this.grid = grid;
-    }
+
 
     /**
      * refresh the board
