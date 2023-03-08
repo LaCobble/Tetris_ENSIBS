@@ -46,7 +46,7 @@ public class Game {
         // Precondition: The game is running
         assert(isRunning);
         Tetromino current = tetrisBoard.getActualTetromino();
-        if ((current.canMoveDown() == false) & (current.canMoveDown() == false) & (current.canMoveDown() == false)) {
+        if ((current.canMoveDown() == false) && (current.canMoveDown() == false) && (current.canMoveDown() == false)) {
             isRunning = false;
             // Display final score
             System.out.println("Final Score: " + score);
