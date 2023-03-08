@@ -1,104 +1,104 @@
-import java.util.Scanner;
-/**
- *
- * @author Cyberlog - Groupe 2
- * @version 1.0
- * This class is used for managing the game. It is used to start, pause, resume, end the game.
- *
- */
+import java.util.*;
+import java.io.*;
+
 public class Game {
-
-    // Attributes
-    // The TetrisBoard object
+    private HighScoreManager manager;
     private TetrisBoard tetrisBoard;
-
-    // The current Tetromino
     private Tetromino currentTetromino;
-
-    // The score
     private int score;
-
-    // The high score
     private int highScore;
-
-    // The game is running
     private boolean isRunning;
+    private LevelManager instance = LevelManager.getInstance();
 
     /**
-     * Allows to start the game
+     * This method is used to start the game
      */
     public void start() {
-        // Pré-condition: Le jeu n'est pas en cours d'exécution
+        // PreCondition : The game is not running
         if (!isRunning) {
-            // Initialiser le plateau de jeu et un Tetromino
+            // Initialize the Board and generate the Tetrominoes
             tetrisBoard = new TetrisBoard();
-            //currentTetromino = TetrisBoard.addTetris();
+            //List<Tetromino> tetrominoOrder; = TetrisBoard.generateTetrominoOrder();
+            //currentTetromino = tetrisBoard.getActualTetromino();
+
             isRunning = true;
         }
-        // Post-condition: Le jeu est maintenant en cours d'exécution
+        // Post-condition: The game is now running
         assert(isRunning);
     }
 
     /**
-     * Allows to pause the game
+     * This method is used to pause the game
      */
     public void pause() {
-        // Pré-condition: Le jeu est en cours d'exécution
+        // PreCondition : The game is running
         assert(isRunning);
+        instance.setSpeed(0);
         isRunning = false;
-        tetrisBoard.setSpeed(0);
-        // Post-condition: Le jeu n'est plus en cours d'exécution
+        // Post-condition: The game is no longer running
         assert(!isRunning);
     }
 
     /**
-     * Allows to end the game
+     * This method is used to check if the game ended, and displays the score
      */
     public void end() {
-        // Pré-condition: Le jeu est en cours d'exécution
+        // Precondition: The game is running
         assert(isRunning);
-        isRunning = false;
-        // Afficher le score final
-        System.out.println("Final Score: " + score);
-        // Post-condition: Le jeu n'est plus en cours d'exécution et le score final est affiché
-        assert(!isRunning);
+        Tetromino current = tetrisBoard.getActualTetromino();
+        if ((current.canMoveDown() == false) & (current.canMoveDown() == false) & (current.canMoveDown() == false)) {
+            isRunning = false;
+            // Display final score
+            System.out.println("Final Score: " + score);
+            // Precondition: The game is no longer running
+            assert (!isRunning);
+        }
     }
 
     /**
-     * Allows to update the high score
+     * This method is used to update the highest score
      */
     public void updateHighScore() {
         if (score > highScore) {
             highScore = score;
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Choose a name");
-        String text = scan.nextLine();
-        scan.close();
-
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter your name for the high score list:");
+            String name = scanner.nextLine().trim();
+            scanner.close();
+            try {
+                List<String> highScores = HighScoreManager.readScores();
+                highScores.add(name + "," + highScore);
+                highScores.sort((s1, s2) -> Integer.compare(Integer.parseInt(s2.split(",")[1]), Integer.parseInt(s1.split(",")[1])));
+                highScore = Integer.parseInt(highScores.get(0).split(",")[1]);
+                HighScoreManager.writeScore(name, highScore);
+            } catch (IOException e) {
+                System.err.println("Error reading/writing high score: " + e.getMessage());
+            }
         }
     }
 
     /**
-     * Allows to display the high score
+     * This method is used to display the highscore
      */
     public void displayHighScore() {
         System.out.println("High Score: " + highScore);
     }
 
+
     /**
-     * Allows to resume the game
+     * This method is used to restart the game
      */
     public void resume(){
-        // Pré-condition: Le jeu n'est pas en cours d'exécution
+        // Precondition: The game is not running
         assert(!isRunning);
         isRunning = true;
-        tetrisBoard.setSpeed(1);
-        // Post-condition: Le jeu est maintenant en cours d'exécution
+        instance.setSpeed(1);
+        // Post-condition: The game is running
         assert(isRunning);
     }
 
     /**
-     * Allows to display the credits
+     * This method is used to display the credits
      */
     public void displayCredits(){
         System.out.println("This game was created by this awesome squad:");
@@ -106,29 +106,28 @@ public class Game {
     }
 
     /**
-     * Allows to display the game rules
-     * @param score integer
+     * This method is used to set a score
      */
     public void setScore(int score) {
         this.score = score;
     }
 
     /**
-     * Getter of the score
+     * This method is used to get a score
      */
     public int getScore() {
         return score;
     }
 
     /**
-     * Test if the game is running
+     * This method is used to see if the game is running
      */
     public Boolean getisRunning() {
         return isRunning;
     }
 
     /**
-     * Setter of the game state
+     * This method is used to change the state of the game
      */
     public void setisRunning(Boolean bool){
         this.isRunning = bool;
