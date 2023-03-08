@@ -7,7 +7,9 @@
  */
 public class Grid {
 
-    public Cell[][] grid;
+    // The grid is a 2D array of cells
+    private Cell[][] grid;
+
     private int dimensionX;
     private int dimensionY;
     private int x;
@@ -16,74 +18,64 @@ public class Grid {
     public Grid(int dimensionX, int dimensionY){
         grid = new Cell[dimensionX][dimensionY];
     }
+    /**
+     * getter for dimensionX
+     * @return dimensionX int
+     */
     public int getDimensionX() {
         return dimensionX;
     }
+    /**
+     * getter for dimensionY
+     * @return dimensionY int
+     */
     public int getDimensionY() {
         return dimensionY;
     }
+
+    /** setter for dimension
+     * @param dimensionX int and dimensionY int
+     */
 
     public void setDimension(int dimensionX, int dimensionY) {
         this.dimensionX = dimensionX;
         this.dimensionY = dimensionY;
     }
-    // The grid is a 2D array of cells
-    public Cell[][] cells;
-
-    // The grid is a square
-    private int dimension;
-
-    // The grid is located at the top left corner of the screen
-
-
-    /**
-     * getter for dimension
-     * @return dimension integer
-     */
-    public int getDimension() {
-        return dimension;
-    }
-
-    /** setter for dimension
-     * @param dimension integer
-     */
-    public void setDimension(int dimension) {
-        this.dimension = dimension;
-    }
 
     /**
      * getter for x
-     * @return x integer
+     * @return x int
      */
     public int getX() {
-
         return x;
     }
-
-    /**
-     * setter for x
-     * @param x integer
-     */
-    public void setX(Integer x) {
-        this.x = x;
-    }
-
     /**
      * getter for y
-     * @return y integer
+     * @return y int
      */
     public int getY() {
-
         return y;
     }
 
     /**
+     * setter for x
+     * @param x int
+     */
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    /**
      * setter for y
-     * @param y integer
+     * @param y int
      */
     public void setY(int y) {
         this.y = y;
     }
+    /**
+     * getter for y
+     * @return grid Cell[][]
+     */
 
     public Cell[][] getGrid() {
         return grid;

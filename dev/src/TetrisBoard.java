@@ -1,5 +1,4 @@
 import Interfaces.TetrisBoardInterface;
-import Interfaces.TetrominoInterface;
 import Enum.TetrominoType;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public class TetrisBoard implements TetrisBoardInterface {
     private Grid grid ;
 
     // The score of the game
-    private Integer lineCompleted;
+    private int lineCompleted;
 
     // The number of tetris
     private boolean pause;
@@ -28,19 +27,14 @@ public class TetrisBoard implements TetrisBoardInterface {
 
 
     // The order of tetromino
-    private Integer order;
+    private int order;
 
     // Tetromino aside
     private Tetromino asideTetromino;
 
-
-
-    public TetrisBoard() {
-        grid = new Grid(4, 4);
-
+    public TetrisBoard(Grid grid) {
+        this.grid = grid;
     }
-
-
 
     /**
      * refresh the board
@@ -60,32 +54,37 @@ public class TetrisBoard implements TetrisBoardInterface {
 
     /**
      * check if a line is completed
-     * @return true if the line is completed
+     * @return 1 if the line is completed
      */
     @Override
-    public int checkLineCompletion() {
-        return 0;
+    public int[] checkLineCompletion() {
+        int[] R = new int[grid.getDimensionY()];
+        for (int y=0; y<grid.getDimensionY(); y++){
+            int columnCounter = 0;
+            for (int x=0; x<grid.getDimensionX(); x++){
+                if (grid.getGrid()[x][y]!=null){
+                    columnCounter++;
+                }
+                else if (columnCounter==grid.getDimensionY()){
+                    R[y]= 1;
+                }
+            }
+        }
+        return R;
     }
 
     /**
-     * allow to clear a line
+     * clear a line
+     * and goes down 1 all cells
      */
-    @Override
-    public void clearLine() {
-
-    }
-
-    /**
-     * allow to add a tetris
-     */
-    @Override
-    public void addTetris() {
-
-
-    public void clearLine(int y) {
-        Cell[][] gride = grid.getGrid();
-        for (int i = 0; i < grid.getDimensionX(); i++) {
-            gride[i][y] = null;
+    public void clearLine(int Y) {
+        for (int x = 0; x < grid.getDimensionX(); x++) {
+            grid.getGrid()[x][Y] = null;
+            for (int y=Y; y<grid.getDimensionY(); y++){
+                if (grid.getGrid()[x][y]!=null){
+                    grid.getGrid()[x][y]=grid.getGrid()[x][y-1];
+                }
+            }
         }
     }
 
@@ -104,7 +103,7 @@ public class TetrisBoard implements TetrisBoardInterface {
     }
 
     /**
-     * shuffle a array
+     * shuffle an array
      * @param A array
      */
     public static void shuffle(int[] A)
