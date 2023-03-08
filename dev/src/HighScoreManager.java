@@ -1,16 +1,26 @@
 import java.io.*;
 import java.util.*;
 
-// a csv file with the 10 best scores and the name of the player, write the score if it is in the top 10, and read the scores from the file to display them in the game
+/**
+ *
+ * @author Cyberlog - Groupe 2
+ * @version 1.0
+ * This class is used for the high score management. It is used to write the scores in a csv file and to read them to display them in the game.
+ *
+ */
 public class HighScoreManager {
 
-    // csv path file
+    // the path of the csv file
     private static final String CSV_FILE_PATH = "Files/highscores.csv";
 
     // the maximum number of scores to be saved
     private static final int MAX_SCORES = 10;
 
-    // a csv file with the 10 best scores and the name of the player
+    /**
+     * Writes the score of the player in the csv file
+     * @param name the name of the player
+     * @param score the score of the player
+     */
     public static void writeScore(String name, int score) throws IOException {
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
@@ -24,6 +34,7 @@ public class HighScoreManager {
         if (lines.size() > MAX_SCORES) {
             lines = lines.subList(0, MAX_SCORES);
         }
+        // write the scores in the file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_FILE_PATH))) {
             for (String line : lines) {
                 writer.write(line);
@@ -32,7 +43,10 @@ public class HighScoreManager {
         }
     }
 
-    // read the scores from the file to display them in the game
+    /**
+     * Reads the scores from the csv file
+     * @return the list of the scores
+     */
     public static List<String> readScores() throws IOException {
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {

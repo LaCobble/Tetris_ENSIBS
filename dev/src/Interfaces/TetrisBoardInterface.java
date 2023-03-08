@@ -5,16 +5,16 @@ import Enum.TetrominoType;
 
 
 public interface TetrisBoardInterface {
+
+    void initGrid();
     void update();
 
     void render();
 
-    Integer checkLineCompletion();
+    int checkLineCompletion();
 
-    void clearLine();
+    void clearLine(int y);
 
-
-    void addTetris();
 
     TetrominoInterface[] generateTrominoOrder();
 
@@ -24,7 +24,6 @@ public interface TetrisBoardInterface {
 
     TetrominoInterface getNextTetromino();
 
-    void fall();
 
     void aside();
 }

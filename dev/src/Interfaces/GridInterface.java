@@ -1,8 +1,11 @@
 package Interfaces;
 
 public interface GridInterface {
-    Boolean isCellOccupied( Integer x,Integer y);
-    Integer getDimension();
-    Integer getX();
-    Integer getY();
+    public CellInterface[][] Grid(int[] dimension);
+    Boolean isCellOccupied( int x,int y);
+    int getDimensionX();
+    int getDimensionY();
+
+    int getX();
+    int getY();
 }

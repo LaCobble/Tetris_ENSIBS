@@ -1,7 +1,7 @@
 import Interfaces.TetrisBoardInterface;
 import Interfaces.TetrominoInterface;
 import Enum.TetrominoType;
-import java.util.Arrays;
+
 import java.util.List;
 import java.util.Random;
 
@@ -15,7 +15,7 @@ import java.util.Random;
 public class TetrisBoard implements TetrisBoardInterface {
 
     // The grid of the game
-    private Grid grid;
+    private Grid grid ;
 
     // The score of the game
     private Integer lineCompleted;
@@ -27,49 +27,79 @@ public class TetrisBoard implements TetrisBoardInterface {
     private List<Tetromino> tetrominoOrder;
 
 
-    //
+    // The order of tetromino
     private Integer order;
 
     // Tetromino aside
     private Tetromino asideTetromino;
 
-    
+
+    public TetrisBoard() {
+        grid = new Grid(4, 4);
+
+    }
+
+
+    /**
+     * refresh the board
+     */
+
     @Override
     public void update() {
 
     }
 
+    /**
+     * render the board
+     */
     @Override
     public void render() {
 
     }
 
+    /**
+     * check if a line is completed
+     * @return true if the line is completed
+     */
     @Override
-    public Integer checkLineCompletion() {
-        return null;
+    public int checkLineCompletion() {
+        return 0;
     }
 
+    /**
+     * allow to clear a line
+     */
     @Override
-    public void clearLine() {
 
-    }
-
-    @Override
-    public void addTetris() {
-
+    public void clearLine(int y) {
+        Cell[][] gride = grid.getGrid();
+        for (int i = 0; i < grid.getDimensionX(); i++) {
+            gride[i][y] = null;
+        }
     }
 
     @Override
     public TetrominoInterface[] generateTrominoOrder() {
         return null;
     }
+
+    /**
+     * swap
+     * @param A array
+     * @param i int
+     * @param j int
+     */
     private static void swap(int[] A, int i, int j)
     {
         int temp = A[i];
         A[i] = A[j];
         A[j] = temp;
     }
-    // Function to shuffle an array `A[]`
+
+    /**
+     * shuffle a array
+     * @param A array
+     */
     public static void shuffle(int[] A)
     {
         // read array from the highest index to lowest
@@ -84,6 +114,11 @@ public class TetrisBoard implements TetrisBoardInterface {
             swap(A, i, j);
         }
     }
+
+    /**
+     * generation of balanced random numbers
+     * @return a random number
+     */
     @Override
     public int generationBalancedRandomNumbers() {
         int[] A = {0, 1, 2, 3, 4, 5, 6 };
@@ -91,21 +126,29 @@ public class TetrisBoard implements TetrisBoardInterface {
         return A[0];
     }
 
+    /**
+     * get the actual tetromino
+     * @return the actual tetromino
+     */
     @Override
     public Tetromino getActualTetromino() {
         return tetrominoOrder.get(generationBalancedRandomNumbers());
     }
 
+    /**
+     * get the next tetromino
+     * @return the next tetromino
+     */
     @Override
     public Tetromino getNextTetromino() {
         return tetrominoOrder.get(generationBalancedRandomNumbers());
     }
 
-    @Override
-    public void fall() {
 
-    }
-
+    /**
+     * get the aside tetromino
+     * @return the aside tetromino
+     */
     @Override
     public void aside() {
 
