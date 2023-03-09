@@ -1,6 +1,7 @@
 import Interfaces.TetrisBoardInterface;
 import Enum.TetrominoType;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -15,13 +16,14 @@ public class TetrisBoard implements TetrisBoardInterface {
 
     // The grid of the game
     private Grid grid;
+    private Cell[][] gride;
 
     // The score of the game
     private int lineCompleted;
 
 
     // The list of all tetromino
-    private List<Tetromino> tetrominoOrder;
+    private List<Tetromino> tetrominoOrder = new ArrayList<>();
 
 
     // Tetromino aside
@@ -29,6 +31,8 @@ public class TetrisBoard implements TetrisBoardInterface {
 
     public TetrisBoard() {
         grid = new Grid();
+        gride = grid.getGrid();
+        setTetrominoOrder();
     }
 
     /**
@@ -36,8 +40,11 @@ public class TetrisBoard implements TetrisBoardInterface {
      */
     @Override
     public void update() {
-
+        grid.updateGrid(gride);
     }
+    ///public void update(Color[][] matrix, int row, int column, Color newColor) {
+    //    matrix[row][column] = newColor;
+    //}
 
     /**
      * render the board
@@ -77,7 +84,7 @@ public class TetrisBoard implements TetrisBoardInterface {
             grid.getGrid()[x][Y] = null;
             for (int y = Y; y < grid.getDimensionY(); y++) {
                 if (grid.getGrid()[x][y] != null) {
-                    grid.getGrid()[x][y] = grid.getGrid()[x][y - 1];
+                    grid.getGrid()[x][y] = grid.getGrid()[x][y + 1];
                 }
             }
         }
@@ -162,5 +169,16 @@ public class TetrisBoard implements TetrisBoardInterface {
         for (TetrominoType i : TetrominoType.values()) {
             tetrominoOrder.add(new Tetromino(i));
         }
+    }
+
+    public void addTetrominoToGrid(Tetromino tetromino){
+        for (int i=0; i<4;i++){
+            Point point = tetromino.positions[i];
+            grid.addCell(tetromino, point.getX(), point.getY());
+        }
+    }
+    public Cell[][] getGrid(){
+
+        return grid.getGrid();
     }
 }

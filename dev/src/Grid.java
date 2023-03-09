@@ -10,8 +10,6 @@ public class Grid {
     // The grid is a 2D array of cells
     private Cell[][] grid;
 
-    private Cell cell;
-
     private int dimensionX = 10;
     private int dimensionY = 20;
 
@@ -50,11 +48,13 @@ public class Grid {
     public Cell[][] getGrid() {
         return grid;
     }
+    public void updateGrid(Cell[][] grid){
+        this.grid = grid;
+    }
 
     public void addCell(Tetromino tetromino,int x, int y ){
         assert (dimensionX >= x && x >= 0);
         assert (dimensionY >= y && y >= 0);
-        cell = new Cell(tetromino,x,y);
-        grid[x][y] = cell;
+        grid[x][y] = new Cell(tetromino,x,y);
     }
 }
