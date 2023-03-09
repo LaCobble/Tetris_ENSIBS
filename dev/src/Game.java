@@ -17,9 +17,26 @@ public class Game {
         // PreCondition : The game is not running
         if (!isRunning) {
             // Initialize the Board and generate the Tetrominoes
-            tetrisBoard = new TetrisBoard();
-            //List<Tetromino> tetrominoOrder; = TetrisBoard.generateTetrominoOrder();
-            //currentTetromino = tetrisBoard.getActualTetromino();
+            TetrisBoard tetrisBoard = new TetrisBoard();
+            Tetromino currentTetromino = tetrisBoard.getActualTetromino();
+            tetrisBoard.addTetrominoToGrid(currentTetromino);
+            for (int x=0;x<10;x++){
+                for (int y=0; y<20;y++){
+                    System.out.print(tetrisBoard.getGrid()[x][y]);
+                }
+                System.out.println();
+            }
+            while (currentTetromino.canMoveDown() == false) {}
+                currentTetromino = tetrisBoard.getActualTetromino();
+                tetrisBoard.addTetrominoToGrid(currentTetromino);
+                /** Display on terminal, we don't really need it
+                for (int x=0;x<10;x++){
+                    for (int y=0; y<20;y++){
+                        System.out.print(tetrisBoard.getGrid()[x][y]);
+                    }
+                    System.out.println();
+                }
+                 */
 
             isRunning = true;
         }
@@ -42,11 +59,11 @@ public class Game {
     /**
      * This method is used to check if the game ended, and displays the score
      */
-    public void end() {
+    public void end(Game game) {
         // Precondition: The game is running
         assert(isRunning);
-        Tetromino current = tetrisBoard.getActualTetromino();
-        if ((current.canMoveDown() == false) && (current.canMoveDown() == false) && (current.canMoveDown() == false)) {
+        Tetromino currentTetromino = game.tetrisBoard.getActualTetromino();
+        if ((currentTetromino.canMoveDown() == false) && (currentTetromino.canMoveDown() == false) && (currentTetromino.canMoveDown() == false)) {
             isRunning = false;
             // Display final score
             System.out.println("Final Score: " + score);

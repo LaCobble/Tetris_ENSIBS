@@ -222,4 +222,8 @@ public class Tetromino implements TetrominoInterface {
     public int getRotation() {
         return rotation;
     }
+
+    public Point[] getPositions() {
+        return positions;
+    }
 }
