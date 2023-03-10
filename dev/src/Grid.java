@@ -16,41 +16,6 @@ public class Grid {
     public Grid(){
         grid = new Cell[dimensionX][dimensionY];
     }
-    /**
-     * getter for dimensionX
-     * @return dimensionX int
-     */
-    public int getDimensionX() {
-        return dimensionX;
-    }
-    /**
-     * getter for dimensionY
-     * @return dimensionY int
-     */
-    public int getDimensionY() {
-        return dimensionY;
-    }
-
-    /** setter for dimension
-     * @param dimensionX int and dimensionY int
-     */
-
-    public void setDimension(int dimensionX, int dimensionY) {
-        this.dimensionX = dimensionX;
-        this.dimensionY = dimensionY;
-    }
-
-    /**
-     * getter for grid
-     * @return grid Cell[][]
-     */
-
-    public Cell[][] getGrid() {
-        return grid;
-    }
-    public void updateGrid(Cell[][] grid){
-        this.grid = grid;
-    }
 
     /**
      * Adds a new cell with the specified Tetromino object to the grid at the given x and y coordinates.
@@ -74,5 +39,41 @@ public class Grid {
         assert (dimensionX >= x && x >= 0);
         assert (dimensionY >= y && y >= 0);
         return grid[x][y];
+    }
+    /**
+     * getter for dimensionX
+     * @return dimensionX int
+     */
+    public int getDimensionX() {
+        return dimensionX;
+    }
+
+    /**
+     * getter for dimensionY
+     * @return dimensionY int
+     */
+    public int getDimensionY() {
+        return dimensionY;
+    }
+
+    /**
+     * getter for grid
+     * @return grid Cell[][]
+     */
+
+    public Cell[][] getGrid() {
+        return grid;
+    }
+
+    /** setter for dimension
+     * @param dimensionX int and dimensionY int
+     */
+    public void setDimension(int dimensionX, int dimensionY) {
+        this.dimensionX = dimensionX;
+        this.dimensionY = dimensionY;
+    }
+
+    public void updateGrid(Cell[][] grid){
+        this.grid = grid;
     }
 }
