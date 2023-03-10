@@ -10,8 +10,8 @@ public class Grid {
     // The grid is a 2D array of cells
     private Cell[][] grid;
 
-    private int dimensionX = 10;
-    private int dimensionY = 20;
+    public static int dimensionX = 10;
+    public static int dimensionY = 20;
 
     public Grid(){
         grid = new Cell[dimensionX][dimensionY];
@@ -40,21 +40,6 @@ public class Grid {
         assert (dimensionY >= y && y >= 0);
         return grid[x][y];
     }
-    /**
-     * getter for dimensionX
-     * @return dimensionX int
-     */
-    public int getDimensionX() {
-        return dimensionX;
-    }
-
-    /**
-     * getter for dimensionY
-     * @return dimensionY int
-     */
-    public int getDimensionY() {
-        return dimensionY;
-    }
 
     /**
      * getter for grid
@@ -63,14 +48,6 @@ public class Grid {
 
     public Cell[][] getGrid() {
         return grid;
-    }
-
-    /** setter for dimension
-     * @param dimensionX int and dimensionY int
-     */
-    public void setDimension(int dimensionX, int dimensionY) {
-        this.dimensionX = dimensionX;
-        this.dimensionY = dimensionY;
     }
 
     public void updateGrid(Cell[][] grid){
