@@ -15,8 +15,8 @@ import java.util.Random;
 public class TetrisBoard implements TetrisBoardInterface {
 
     // The grid of the game
-    private Grid grid;
-    private Cell[][] gride;
+    private Board board;
+    private Cell[][] grid;
 
     // The score of the game
     private int lineCompleted;
@@ -31,8 +31,8 @@ public class TetrisBoard implements TetrisBoardInterface {
     private static TetrisBoard instance;
 
     private TetrisBoard() {
-        grid = new Grid();
-        gride = grid.getGrid();
+        board = new Board();
+        grid = new Board().getGrid();
         setTetrominoOrder();
     }
 
@@ -48,7 +48,7 @@ public class TetrisBoard implements TetrisBoardInterface {
      */
     @Override
     public void update() {
-        grid.updateGrid(gride);
+        board.updateGrid(grid);
     }
     ///public void update(Color[][] matrix, int row, int column, Color newColor) {
     //    matrix[row][column] = newColor;
@@ -69,13 +69,13 @@ public class TetrisBoard implements TetrisBoardInterface {
      */
     @Override
     public int[] checkLineCompletion() {
-        int[] R = new int[Grid.dimensionY];
-        for (int y = 0; y < Grid.dimensionY; y++) {
+        int[] R = new int[Board.dimensionY];
+        for (int y = 0; y < Board.dimensionY; y++) {
             int columnCounter = 0;
-            for (int x = 0; x < Grid.dimensionX; x++) {
-                if (grid.getGrid()[x][y] != null) {
+            for (int x = 0; x < Board.dimensionX; x++) {
+                if (board.getGrid()[x][y] != null) {
                     columnCounter++;
-                } else if (columnCounter == Grid.dimensionY) {
+                } else if (columnCounter == Board.dimensionY) {
                     R[y] = 1;
                 }
             }
@@ -88,11 +88,11 @@ public class TetrisBoard implements TetrisBoardInterface {
      * and goes down 1 all cells
      */
     public void clearLine(int Y) {
-        for (int x = 0; x < Grid.dimensionX; x++) {
-            grid.getGrid()[x][Y] = null;
-            for (int y = Y; y < Grid.dimensionY; y++) {
-                if (grid.getGrid()[x][y] != null) {
-                    grid.getGrid()[x][y] = grid.getGrid()[x][y + 1];
+        for (int x = 0; x < Board.dimensionX; x++) {
+            board.getGrid()[x][Y] = null;
+            for (int y = Y; y < Board.dimensionY; y++) {
+                if (board.getGrid()[x][y] != null) {
+                    board.getGrid()[x][y] = board.getGrid()[x][y + 1];
                 }
             }
         }
@@ -182,11 +182,11 @@ public class TetrisBoard implements TetrisBoardInterface {
     public void addTetrominoToGrid(Tetromino tetromino){
         for (int i=0; i<4;i++){
             Point point = tetromino.positions[i];
-            grid.addCell(tetromino, point.getX(), point.getY());
+            board.addCell(tetromino, point.getX(), point.getY());
         }
     }
 
-    public Grid getGrid(){
-        return grid;
+    public Board getGrid(){
+        return board;
     }
 }

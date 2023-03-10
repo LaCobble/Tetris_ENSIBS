@@ -22,7 +22,7 @@ public class Game {
             tetrisBoard.addTetrominoToGrid(currentTetromino);
             for (int x=0;x<10;x++){
                 for (int y=0; y<20;y++){
-                    System.out.print(tetrisBoard.getGrid()[x][y]);
+                    System.out.print(tetrisBoard.getGrid().getCell(x, y));
                 }
                 System.out.println();
             }

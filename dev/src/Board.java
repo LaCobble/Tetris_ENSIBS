@@ -5,7 +5,7 @@
  * This class is used for the grid of the game.
  *
  */
-public class Grid {
+public class Board {
 
     // The grid is a 2D array of cells
     private Cell[][] grid;
@@ -13,7 +13,7 @@ public class Grid {
     public static int dimensionX = 10;
     public static int dimensionY = 20;
 
-    public Grid(){
+    public Board(){
         grid = new Cell[dimensionX][dimensionY];
     }
 
@@ -41,16 +41,11 @@ public class Grid {
         return grid[x][y];
     }
 
-    /**
-     * getter for grid
-     * @return grid Cell[][]
-     */
+    public void updateGrid(Cell[][] grid){
+        this.grid = grid;
+    }
 
     public Cell[][] getGrid() {
         return grid;
-    }
-
-    public void updateGrid(Cell[][] grid){
-        this.grid = grid;
     }
 }
