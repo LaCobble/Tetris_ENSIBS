@@ -1,3 +1,5 @@
+import Interfaces.PointInterface;
+
 /**
  *
  * @author Cyberlog - Groupe 2
@@ -5,7 +7,7 @@
  * This class represents a point in a 2D space.
  *
  */
-public class Point {
+public class Point implements PointInterface {
 
     /** The x coordinate of the point */
     private int x;
@@ -44,6 +46,7 @@ public class Point {
      * get the x coordinate of the point
      * @return x
      */
+    @Override
     public int getX(){
         return this.x;
     }
@@ -52,7 +55,9 @@ public class Point {
      * get the y coordinate of the point
      * @return y
      */
+    @Override
     public int getY(){
         return this.y;
     }
+
 }

@@ -6,15 +6,15 @@ import java.awt.*;
 
 public interface TetrominoInterface {
 
-    boolean canMoveLeft();
+    PointInterface[] canMoveLeft();
 
-    boolean canMoveRight();
+    PointInterface[] canMoveRight();
 
-    boolean canMoveDown();
+    PointInterface[] canMoveDown();
 
-    boolean canRotateClockwise();
+    PointInterface[] canRotateClockwise();
 
-    boolean canRotateCounterClockwise();
+    PointInterface[] canRotateCounterClockwise();
 
     void moveLeft();
 
