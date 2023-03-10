@@ -186,8 +186,8 @@ public class TetrisBoard implements TetrisBoardInterface {
             grid.addCell(tetromino, point.getX(), point.getY());
         }
     }
-    public Cell[][] getGrid(){
 
+    public Cell[][] getGrid(){
         return grid.getGrid();
     }
 }
