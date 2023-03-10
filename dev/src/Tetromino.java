@@ -209,6 +209,7 @@ public class Tetromino implements TetrominoInterface {
     public TetrominoType getTetrominoType() {
         return type;
     }
+
     /**
      * This method is used to get the color of the Tetromino.
      * @return the color of the Tetromino
@@ -217,12 +218,19 @@ public class Tetromino implements TetrominoInterface {
         return color;
     }
 
-
+    /**
+     * This method is used to get the rotation of the Tetromino.
+     * @return the rotation of the Tetromino
+     */
     @Override
     public int getRotation() {
         return rotation;
     }
 
+    /**
+     * This method is used to get the positions of the Tetromino.
+     * @return the positions of the Tetromino
+     */
     public Point[] getPositions() {
         return positions;
     }
