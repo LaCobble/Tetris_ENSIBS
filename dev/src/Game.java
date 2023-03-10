@@ -17,7 +17,7 @@ public class Game {
         // PreCondition : The game is not running
         if (!isRunning) {
             // Initialize the Board and generate the Tetrominoes
-            TetrisBoard tetrisBoard = new TetrisBoard();
+            tetrisBoard = TetrisBoard.getInstance();
             Tetromino currentTetromino = tetrisBoard.getActualTetromino();
             tetrisBoard.addTetrominoToGrid(currentTetromino);
             for (int x=0;x<10;x++){

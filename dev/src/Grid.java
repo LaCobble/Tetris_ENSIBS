@@ -52,9 +52,27 @@ public class Grid {
         this.grid = grid;
     }
 
+    /**
+     * Adds a new cell with the specified Tetromino object to the grid at the given x and y coordinates.
+     * @param tetromino The Tetromino object to add to the cell.
+     * @param x The x-coordinate of the cell in the grid.
+     * @param y The y-coordinate of the cell in the grid.
+     */
     public void addCell(Tetromino tetromino,int x, int y ){
         assert (dimensionX >= x && x >= 0);
         assert (dimensionY >= y && y >= 0);
         grid[x][y] = new Cell(tetromino,x,y);
+    }
+
+    /**
+     * Getter for a cell at specified coordinates.
+     * @param x The x-coordinate of the cell to get.
+     * @param y The y-coordinate of the cell to get.
+     * @return The Cell object at the specified coordinates.
+     */
+    public Cell getCell(int x, int y) {
+        assert (dimensionX >= x && x >= 0);
+        assert (dimensionY >= y && y >= 0);
+        return grid[x][y];
     }
 }

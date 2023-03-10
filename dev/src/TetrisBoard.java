@@ -29,10 +29,19 @@ public class TetrisBoard implements TetrisBoardInterface {
     // Tetromino aside
     private Tetromino asideTetromino;
 
-    public TetrisBoard() {
+    private static TetrisBoard instance;
+
+    private TetrisBoard() {
         grid = new Grid();
         gride = grid.getGrid();
         setTetrominoOrder();
+    }
+
+    public static TetrisBoard getInstance() {
+        if (instance == null) {
+            instance = new TetrisBoard();
+        }
+        return instance;
     }
 
     /**
@@ -177,8 +186,8 @@ public class TetrisBoard implements TetrisBoardInterface {
             grid.addCell(tetromino, point.getX(), point.getY());
         }
     }
-    public Cell[][] getGrid(){
 
+    public Cell[][] getGrid(){
         return grid.getGrid();
     }
 }
