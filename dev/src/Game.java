@@ -17,7 +17,7 @@ public class Game {
         // PreCondition : The game is not running
         if (!isRunning) {
             // Initialize the Board and generate the Tetrominoes
-            tetrisBoard = new TetrisBoard();
+            tetrisBoard = TetrisBoard.getInstance();
             //List<Tetromino> tetrominoOrder; = TetrisBoard.generateTetrominoOrder();
             //currentTetromino = tetrisBoard.getActualTetromino();
 
@@ -46,7 +46,7 @@ public class Game {
         // Precondition: The game is running
         assert(isRunning);
         Tetromino current = tetrisBoard.getActualTetromino();
-        if ((current.canMoveDown() == false) && (current.canMoveDown() == false) && (current.canMoveDown() == false)) {
+        if ((!current.canMoveDown()) && (!current.canMoveDown()) && (!current.canMoveDown())) {
             isRunning = false;
             // Display final score
             System.out.println("Final Score: " + score);
