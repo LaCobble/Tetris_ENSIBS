@@ -57,4 +57,16 @@ public class Grid {
         assert (dimensionY >= y && y >= 0);
         grid[x][y] = new Cell(tetromino,x,y);
     }
+
+    /**
+     * Getter for a cell at specified coordinates.
+     * @param x The x-coordinate of the cell to get.
+     * @param y The y-coordinate of the cell to get.
+     * @return The Cell object at the specified coordinates.
+     */
+    public Cell getCell(int x, int y) {
+        assert (dimensionX >= x && x >= 0);
+        assert (dimensionY >= y && y >= 0);
+        return grid[x][y];
+    }
 }
