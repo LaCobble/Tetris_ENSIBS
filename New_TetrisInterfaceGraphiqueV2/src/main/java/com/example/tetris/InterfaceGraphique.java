@@ -150,7 +150,7 @@ public class InterfaceGraphique extends Application {
             case DOWN:
                 while (game.getCurrentTetromino().moveDown());
                 break;
-            /**case UP:
+            case UP:
                 currentTetromino.rotateClockwise();
                 break;
             default:

@@ -1,5 +1,7 @@
 package com.example.tetris;
 
+import com.example.tetris.Interfaces.BoardInterface;
+
 /**
  *
  * @author Cyberlog - Groupe 2
@@ -7,7 +9,7 @@ package com.example.tetris;
  * This class is used for the grid of the game.
  *
  */
-public class Board {
+public class Board implements BoardInterface {
 
     // The grid is a 2D array of cells
     private Cell[][] grid;
@@ -46,12 +48,19 @@ public class Board {
         return grid[x][y];
     }
 
-    public void updateGrid(Cell[][] grid){
-        this.grid = grid;
-    }
 
     public Cell[][] getGrid() {
         return grid;
     }
 
+    public int getDimensionX() {
+        return dimensionX;
+    }
+
+    public int getDimensionY() {
+        return dimensionY;
+    }
+    public void moveCell(int x, int y, int newX,int newY){
+        grid[newX][newY] =grid[x][y];
+    }
 }

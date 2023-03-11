@@ -7,6 +7,7 @@ public class Game {
     private HighScoreManager manager;
     private TetrisBoard tetrisBoard;
     private Tetromino currentTetromino;
+    private Tetromino nextTetromino;
     private int score;
     private int highScore;
     private boolean isRunning;
@@ -24,7 +25,7 @@ public class Game {
         System.out.println("Game started.");
 
         // Create first tetromino
-        currentTetromino = tetrisBoard.getActualTetromino();
+        setCurrentTetromino();
         // Add tetromino to board
         tetrisBoard.addTetrominoToBoard(currentTetromino);
 
@@ -155,5 +156,15 @@ public class Game {
 
     public Tetromino getCurrentTetromino() {
         return currentTetromino;
+    }
+    public void setCurrentTetromino(){
+        currentTetromino = tetrisBoard.getActualTetromino();
+    }
+    public void setNextTetromino(){
+        nextTetromino = tetrisBoard.getNextTetromino();
+    }
+    public void swapTetromino(){
+        currentTetromino = nextTetromino;
+        setNextTetromino();
     }
 }

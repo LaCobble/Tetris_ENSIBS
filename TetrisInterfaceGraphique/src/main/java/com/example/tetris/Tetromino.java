@@ -189,7 +189,6 @@ public class Tetromino implements TetrominoInterface {
 
             newPos[i] = new Point(x, y);
         }
-        System.out.println("Tetromino moved down");
         return newPos;
     }
 

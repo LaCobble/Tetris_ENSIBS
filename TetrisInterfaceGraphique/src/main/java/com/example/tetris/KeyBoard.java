@@ -31,9 +31,9 @@ public class KeyBoard {
      */
     public static String readDirection() throws IOException {
         String input = read();
-        /** if (input.equals("s") || input.equals("S")) {
+        if (input.equals("s") || input.equals("S")) {
             return "fall";
-        }*/
+        }
         if (input.equals("q") || input.equals("Q")) {
             return "left";
         }

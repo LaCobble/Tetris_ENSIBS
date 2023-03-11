@@ -62,31 +62,31 @@ public class TetrisBoard implements TetrisBoardInterface {
      * @return 1 if the line is completed
      */
     @Override
-    public int[] checkLineCompletion() {
-        int[] R = new int[Board.dimensionY];
+    public int checkLineCompletion(Cell[][] grid) {
+        int r = 0;
         for (int y = 0; y < Board.dimensionY; y++) {
             int columnCounter = 0;
             for (int x = 0; x < Board.dimensionX; x++) {
-                if (board.getGrid()[x][y] != null) {
+                if (grid[x][y] != null) {
                     columnCounter++;
                 } else if (columnCounter == Board.dimensionY) {
-                    R[y] = 1;
+                    r = y;
                 }
             }
         }
-        return R;
+        return r;
     }
-
     /**
      * clear a line
      * and goes down 1 all cells
      */
     public void clearLine(int Y) {
         for (int x = 0; x < Board.dimensionX; x++) {
-            board.getGrid()[x][Y] = null;
-            for (int y = Y; y < Board.dimensionY; y++) {
+            board.deleteCell(x,Y);
+            System.out.println("ligne delete");
+            for (int y = Y; y <= Board.dimensionY; y++) {
                 if (board.getGrid()[x][y] != null) {
-                    board.getGrid()[x][y] = board.getGrid()[x][y + 1];
+                    board.moveCell(x,y,x,y+1);
                 }
             }
         }
