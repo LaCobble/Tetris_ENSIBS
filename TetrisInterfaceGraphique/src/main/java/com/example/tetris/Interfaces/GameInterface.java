@@ -1,5 +1,8 @@
 package com.example.tetris.Interfaces;
 
+import com.example.tetris.TetrisBoard;
+import com.example.tetris.Tetromino;
+
 public interface GameInterface {
     void start();
     void end();
@@ -12,4 +15,6 @@ public interface GameInterface {
     void displayCredits();
     void setScore();
     void getScore();
+    TetrisBoard getTetrisBoard();
+    Tetromino getCurrentTetromino();
 }

@@ -6,6 +6,10 @@ import com.example.tetris.Interfaces.TetrominoInterface;
 
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  *
  * @author Cyberlog - Groupe 2
@@ -87,6 +91,22 @@ public class Tetromino implements TetrominoInterface {
     }
 
     /**
+
+     This constructor is used to create a clone of a Tetromino object.
+
+     @param original the original Tetromino object to clone
+     */
+    public Tetromino(Tetromino original) {
+        this.type = original.type;
+        this.positions = new Point[4];
+        for (int i = 0; i < original.positions.length; i++) {
+            this.positions[i] = new Point(original.positions[i].getX(), original.positions[i].getY());
+        }
+        this.rotation = original.rotation;
+        this.color = original.color;
+    }
+
+    /**
      * Checks if the Tetromino can move left.
      * If it can, it returns the new coordinates after moving left.
      * @return the new coordinates if the Tetromino can move left, null otherwise
@@ -101,7 +121,9 @@ public class Tetromino implements TetrominoInterface {
             int x = p.getX() - 1;
             int y = p.getY();
 
-            if (x < 0 || TetrisBoard.getInstance().getGrid().getCell(x, y) != null) {
+            if (x < 0 ||
+                    (TetrisBoard.getInstance().getBoard().getCell(x, y) != null &&
+                            TetrisBoard.getInstance().getBoard().getCell(x, y).getParentTetromino() != this)) {
                 System.out.println("Tetromino cannot move left.");
                 return null;
             }
@@ -129,7 +151,8 @@ public class Tetromino implements TetrominoInterface {
             int y = p.getY();
 
             if (x >= Board.dimensionX ||
-                    TetrisBoard.getInstance().getGrid().getCell(x, y) != null) {
+                    (TetrisBoard.getInstance().getBoard().getCell(x, y) != null &&
+                            TetrisBoard.getInstance().getBoard().getCell(x, y).getParentTetromino() != this)) {
                 System.out.println("Tetromino cannot move right.");
                 return null;
             }
@@ -148,8 +171,9 @@ public class Tetromino implements TetrominoInterface {
      */
     @Override
     public Point[] canMoveDown() {
+        //System.out.println("Old x  " + positions[0].getX());
+        //System.out.println("Old y  " + positions[0].getY());
         Point[] newPos = new Point[4];
-
         for (int i = 0; i < positions.length; i++) {
             Point p = positions[i];
 
@@ -157,14 +181,15 @@ public class Tetromino implements TetrominoInterface {
             int y = p.getY() + 1;
 
             if (y >= Board.dimensionY ||
-                    TetrisBoard.getInstance().getGrid().getCell(x, y) != null) {
+                    (TetrisBoard.getInstance().getBoard().getCell(x, y) != null &&
+                            TetrisBoard.getInstance().getBoard().getCell(x, y).getParentTetromino() != this)) {
                 System.out.println("Tetromino cannot move down.");
                 return null;
             }
 
             newPos[i] = new Point(x, y);
         }
-
+        System.out.println("Tetromino moved down");
         return newPos;
     }
 
@@ -192,7 +217,8 @@ public class Tetromino implements TetrominoInterface {
 
             if (newX < 0 || newX >= Board.dimensionX ||
                     newY < 0 || newY >= Board.dimensionY ||
-                    TetrisBoard.getInstance().getGrid().getCell(newX, newY) != null) {
+                    (TetrisBoard.getInstance().getBoard().getCell(newX, newY) != null &&
+                            TetrisBoard.getInstance().getBoard().getCell(newX, newY).getParentTetromino() != this)) {
                 System.out.println("Tetromino cannot rotate clockwise.");
                 return null;
             }
@@ -227,7 +253,8 @@ public class Tetromino implements TetrominoInterface {
 
             if (newX < 0 || newX >= Board.dimensionX ||
                     newY < 0 || newY >= Board.dimensionY ||
-                    TetrisBoard.getInstance().getGrid().getCell(newX, newY) != null) {
+                    (TetrisBoard.getInstance().getBoard().getCell(newX, newY) != null &&
+                            TetrisBoard.getInstance().getBoard().getCell(newX, newY).getParentTetromino() != this)) {
                 System.out.println("Tetromino cannot rotate counterclockwise.");
                 return null;
             }
@@ -242,55 +269,67 @@ public class Tetromino implements TetrominoInterface {
      * This method is used to move the Tetromino to the left.
      */
     @Override
-    public void moveLeft() {
+    public boolean moveLeft() {
         Point[] newPos = canMoveLeft();
         if (newPos != null) {
             positions = newPos;
+            return true;
         }
+        return false;
     }
 
     /**
      * This method is used to move the Tetromino to the right.
      */
     @Override
-    public void moveRight() {
+    public boolean moveRight() {
         Point[] newPos = canMoveRight();
         if (newPos != null) {
             positions = newPos;
+            return true;
         }
+        return false;
     }
 
     /**
      * This method is used to move the Tetromino down.
      */
     @Override
-    public void moveDown() {
+    public boolean moveDown() {
         Point[] newPos = canMoveDown();
         if (newPos != null) {
             positions = newPos;
+            //System.out.println("New x  " + positions[0].getX());
+            //System.out.println("New y  " + positions[0].getY());
+            return true;
         }
+        return false;
     }
 
     /**
      * This method is used to rotate the Tetromino clockwise.
      */
     @Override
-    public void rotateClockwise() {
+    public boolean rotateClockwise() {
         Point[] newPos = canRotateClockwise();
         if (newPos != null) {
             positions = newPos;
+            return true;
         }
+        return false;
     }
 
     /**
      * This method is used to rotate the Tetromino counterclockwise.
      */
     @Override
-    public void rotateCounterClockwise() {
+    public boolean rotateCounterClockwise() {
         Point[] newPos = canRotateCounterClockwise();
         if (newPos != null) {
             positions = newPos;
+            return true;
         }
+        return false;
     }
 
     /**
