@@ -19,18 +19,17 @@ import javafx.stage.Stage;
 public class InterfaceGraphique extends Application {
 
 
-    Game game = new Game();
+    Game game ;
 
-    TetrisBoard tetrisBoard = new TetrisBoard();
+    TetrisBoard tetrisBoard ;
     Cell[][] grid ;
-    int score = game.getScore();
+    int score ;
 
     @Override
     public void start(Stage primaryStage) {
 
 
-        tetrisBoard.addTetrominoToGrid(tetrisBoard.getNextTetromino());
-        grid = tetrisBoard.getGrid();
+
 
         GridPane gridPane = new GridPane();
         // Ajout du texte
@@ -79,7 +78,7 @@ public class InterfaceGraphique extends Application {
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 10; j++) {
                 if (grid[i][j]!=null){
-                    java.awt.Color color = grid[i][j].getColor();
+                    Color color = grid[i][j].getColor();
 
                     Rectangle rect = new Rectangle(40, 40);
                     rect.setFill(color);

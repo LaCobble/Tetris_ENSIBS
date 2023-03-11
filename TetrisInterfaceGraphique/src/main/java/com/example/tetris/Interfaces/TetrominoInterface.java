@@ -2,7 +2,7 @@ package com.example.tetris.Interfaces;
 
 import com.example.tetris.Enum.TetrominoType;
 import com.example.tetris.Point;
-import java.awt.*;
+import javafx.scene.paint.Color;
 
 public interface TetrominoInterface {
 
