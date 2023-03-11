@@ -30,6 +30,9 @@ public class Board {
         assert (dimensionY >= y && y >= 0);
         grid[x][y] = new Cell(tetromino,x,y);
     }
+    public void deleteCell(int x, int y){
+        grid[x][y] = null;
+    }
 
     /**
      * Getter for a cell at specified coordinates.
@@ -50,4 +53,5 @@ public class Board {
     public Cell[][] getGrid() {
         return grid;
     }
+
 }

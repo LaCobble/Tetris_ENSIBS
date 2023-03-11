@@ -23,10 +23,14 @@ public class Cell {
 
     private Point point;
 
-    public Cell(Tetromino tetromino,int x, int y) {
+    private final Tetromino parentTetromino;
+
+    public Cell(Tetromino tetromino, int x, int y) {
         this.color = tetromino.getColor();
         this.occupied = true;
-        this.point = new Point(x,y);
+        this.point = new Point(x, y);
+        this.parentTetromino = tetromino;
+
     }
 
     /**
@@ -75,5 +79,9 @@ public class Cell {
      */
     public void setPoint(Point point) {
         this.point = point;
+    }
+
+    public Tetromino getParentTetromino() {
+        return parentTetromino;
     }
 }

@@ -23,7 +23,6 @@ public class TetrisBoard implements TetrisBoardInterface {
     // The score of the game
     private int lineCompleted;
 
-
     // The list of all tetromino
     private List<Tetromino> tetrominoOrder = new ArrayList<>();
 
@@ -49,19 +48,12 @@ public class TetrisBoard implements TetrisBoardInterface {
      * refresh the board
      */
     @Override
-    public void update() {
-        board.updateGrid(grid);
-    }
-    ///public void update(Color[][] matrix, int row, int column, Color newColor) {
-    //    matrix[row][column] = newColor;
-    //}
+    public void updateGrid(Tetromino oldTetromino, Tetromino newTetromino) {
 
-    /**
-     * render the board
-     */
-    @Override
-    public void render() {
-
+        for (int i = 0; i < oldTetromino.positions.length; i++) {
+            board.deleteCell(oldTetromino.positions[i].getX(), oldTetromino.positions[i].getY());
+        }
+        addTetrominoToBoard(newTetromino);
     }
 
     /**
@@ -164,31 +156,20 @@ public class TetrisBoard implements TetrisBoardInterface {
         return tetrominoOrder.get(generationBalancedRandomNumbers());
     }
 
-
-    /**
-     * get the aside tetromino
-     *
-     * @return the aside tetromino
-     */
-    @Override
-    public void aside() {
-
-    }
-
     public void setTetrominoOrder() {
         for (TetrominoType i : TetrominoType.values()) {
             tetrominoOrder.add(new Tetromino(i));
         }
     }
 
-    public void addTetrominoToGrid(Tetromino tetromino){
+    public void addTetrominoToBoard(Tetromino tetromino){
         for (int i=0; i<4;i++){
             Point point = tetromino.positions[i];
             board.addCell(tetromino, point.getX(), point.getY());
         }
     }
 
-    public Board getGrid(){
+    public Board getBoard(){
         return board;
     }
 }

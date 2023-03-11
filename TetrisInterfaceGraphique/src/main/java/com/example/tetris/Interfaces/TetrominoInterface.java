@@ -16,15 +16,15 @@ public interface TetrominoInterface {
 
     Point[] canRotateCounterClockwise();
 
-    void moveLeft();
+    boolean moveLeft();
 
-    void moveRight();
+    boolean moveRight();
 
-    void moveDown();
+    boolean moveDown();
 
-    void rotateClockwise();
+    boolean rotateClockwise();
 
-    void rotateCounterClockwise();
+    boolean rotateCounterClockwise();
 
     TetrominoType getTetrominoType();
 

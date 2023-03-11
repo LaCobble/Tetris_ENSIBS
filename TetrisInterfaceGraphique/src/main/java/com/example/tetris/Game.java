@@ -12,38 +12,35 @@ public class Game {
     private boolean isRunning;
     private LevelManager instance = LevelManager.getInstance();
 
+    public Game() {
+        isRunning = true;
+        tetrisBoard = TetrisBoard.getInstance();
+    }
+
     /**
      * This method is used to start the game
      */
-    public void start() {
-        // PreCondition : The game is not running
-        if (!isRunning) {
-            // Initialize the Board and generate the Tetrominoes
-            tetrisBoard = TetrisBoard.getInstance();
-            Tetromino currentTetromino = tetrisBoard.getActualTetromino();
-            tetrisBoard.addTetrominoToGrid(currentTetromino);
-            for (int x=0;x<10;x++){
-                for (int y=0; y<20;y++){
-                    System.out.print(tetrisBoard.getGrid().getCell(x, y));
-                }
-                System.out.println();
-            }
-            while (currentTetromino.canMoveDown() == null) {}
-                currentTetromino = tetrisBoard.getActualTetromino();
-                tetrisBoard.addTetrominoToGrid(currentTetromino);
-                /** Display on terminal, we don't really need it
-                for (int x=0;x<10;x++){
-                    for (int y=0; y<20;y++){
-                        System.out.print(tetrisBoard.getGrid()[x][y]);
-                    }
-                    System.out.println();
-                }
-                 */
+    public void startGame() {
+        System.out.println("Game started.");
 
-            isRunning = true;
+        // Create first tetromino
+        currentTetromino = tetrisBoard.getActualTetromino();
+        // Add tetromino to board
+        tetrisBoard.addTetrominoToBoard(currentTetromino);
+
+        /*
+        // While game is not finished
+        while (isRunning) {
+            // If current tetromino cannot go down
+            if (!currentTetromino.moveDown()) {
+                // Create new tetromino
+                currentTetromino = tetrisBoard.getActualTetromino();
+                // Add tetromino to board
+                tetrisBoard.addTetrominoToBoard(currentTetromino);
+            }
         }
-        // Post-condition: The game is now running
-        assert(isRunning);
+         */
+
     }
 
     /**
@@ -150,5 +147,13 @@ public class Game {
      */
     public void setisRunning(Boolean bool){
         this.isRunning = bool;
+    }
+
+    public TetrisBoard getTetrisBoard() {
+        return tetrisBoard;
+    }
+
+    public Tetromino getCurrentTetromino() {
+        return currentTetromino;
     }
 }

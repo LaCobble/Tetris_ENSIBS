@@ -7,9 +7,7 @@ import com.example.tetris.Tetromino;
 public interface TetrisBoardInterface {
 
 
-    void update();
-
-    void render();
+    void updateGrid(Tetromino oldTetromino, Tetromino newTetromino);
 
     int[] checkLineCompletion();
 
@@ -23,6 +21,5 @@ public interface TetrisBoardInterface {
     Tetromino getNextTetromino();
 
     void setTetrominoOrder();
-    void aside();
 }
 
