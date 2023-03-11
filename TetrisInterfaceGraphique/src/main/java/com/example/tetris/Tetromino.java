@@ -1,7 +1,10 @@
-import Enum.TetrominoType;
-import Interfaces.TetrominoInterface;
+package com.example.tetris;
 
-import java.awt.*;
+import com.example.tetris.Enum.TetrominoType;
+import com.example.tetris.Interfaces.TetrominoInterface;
+
+
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -32,49 +35,49 @@ public class Tetromino implements TetrominoInterface {
     public Tetromino(TetrominoType type) {
         switch (type) {
             case Z -> {
-                color = Color.red;
+                color = Color.RED;
                 positions[0] = new Point(3, 0);
                 positions[1] = new Point(4, 0);
                 positions[2] = new Point(4, 1);
                 positions[3] = new Point(5, 1);
             }
             case L -> {
-                color = Color.orange;
+                color = Color.ORANGE;
                 positions[0] = new Point(3, 1);
                 positions[1] = new Point(4, 1);
                 positions[2] = new Point(5, 1);
                 positions[3] = new Point(5, 0);
             }
             case O -> {
-                color = Color.yellow;
+                color = Color.YELLOW;
                 positions[0] = new Point(4, 0);
                 positions[1] = new Point(5, 0);
                 positions[2] = new Point(4, 1);
                 positions[3] = new Point(5, 1);
             }
             case S -> {
-                color = Color.green;
+                color = Color.GREEN;
                 positions[0] = new Point(3, 1);
                 positions[1] = new Point(4, 1);
                 positions[2] = new Point(4, 0);
                 positions[3] = new Point(5, 0);
             }
             case I -> {
-                color = Color.cyan;
+                color = Color.CYAN;
                 positions[0] = new Point(3, 0);
                 positions[1] = new Point(4, 0);
                 positions[2] = new Point(5, 0);
                 positions[3] = new Point(6, 0);
             }
             case J -> {
-                color = Color.blue;
+                color = Color.BLUE;
                 positions[0] = new Point(3, 0);
                 positions[1] = new Point(3, 1);
                 positions[2] = new Point(4, 1);
                 positions[3] = new Point(5, 1);
             }
             case T -> {
-                color = Color.magenta;
+                color = Color.MAGENTA;
                 positions[0] = new Point(3, 0);
                 positions[1] = new Point(4, 0);
                 positions[2] = new Point(5, 0);
@@ -301,6 +304,7 @@ public class Tetromino implements TetrominoInterface {
 
     /**
      * This method is used to get the color of the Tetromino.
+     *
      * @return the color of the Tetromino
      */
     public Color getColor(){

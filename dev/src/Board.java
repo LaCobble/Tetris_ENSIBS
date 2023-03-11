@@ -5,15 +5,15 @@
  * This class is used for the grid of the game.
  *
  */
-public class Grid {
+public class Board {
 
     // The grid is a 2D array of cells
     private Cell[][] grid;
 
-    private int dimensionX = 10;
-    private int dimensionY = 20;
+    public static int dimensionX = 10;
+    public static int dimensionY = 20;
 
-    public Grid(){
+    public Board(){
         grid = new Cell[dimensionX][dimensionY];
     }
 
@@ -40,40 +40,12 @@ public class Grid {
         assert (dimensionY >= y && y >= 0);
         return grid[x][y];
     }
-    /**
-     * getter for dimensionX
-     * @return dimensionX int
-     */
-    public int getDimensionX() {
-        return dimensionX;
-    }
-
-    /**
-     * getter for dimensionY
-     * @return dimensionY int
-     */
-    public int getDimensionY() {
-        return dimensionY;
-    }
-
-    /**
-     * getter for grid
-     * @return grid Cell[][]
-     */
-
-    public Cell[][] getGrid() {
-        return grid;
-    }
-
-    /** setter for dimension
-     * @param dimensionX int and dimensionY int
-     */
-    public void setDimension(int dimensionX, int dimensionY) {
-        this.dimensionX = dimensionX;
-        this.dimensionY = dimensionY;
-    }
 
     public void updateGrid(Cell[][] grid){
         this.grid = grid;
+    }
+
+    public Cell[][] getGrid() {
+        return grid;
     }
 }

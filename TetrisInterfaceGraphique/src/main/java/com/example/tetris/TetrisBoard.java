@@ -1,5 +1,7 @@
-import Interfaces.TetrisBoardInterface;
-import Enum.TetrominoType;
+package com.example.tetris;
+
+import com.example.tetris.Interfaces.TetrisBoardInterface;
+import com.example.tetris.Enum.TetrominoType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,7 @@ public class TetrisBoard implements TetrisBoardInterface {
 
     private static TetrisBoard instance;
 
-    private TetrisBoard() {
+    public TetrisBoard() {
         board = new Board();
         grid = new Board().getGrid();
         setTetrominoOrder();
