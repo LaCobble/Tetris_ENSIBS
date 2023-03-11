@@ -1,3 +1,5 @@
+package com.example.tetris;
+
 import java.util.*;
 import java.io.*;
 

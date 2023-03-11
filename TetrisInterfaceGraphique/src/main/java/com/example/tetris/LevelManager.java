@@ -1,3 +1,5 @@
+package com.example.tetris;
+
 /**
  * LevelManager.java
  * This class is used to manage the level of the game.

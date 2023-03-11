@@ -1,4 +1,4 @@
-package Enum;
+package com.example.tetris.Enum;
 
 public enum TetrominoType {
     Z,

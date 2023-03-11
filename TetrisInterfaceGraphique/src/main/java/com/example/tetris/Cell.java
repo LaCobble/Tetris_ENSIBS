@@ -1,6 +1,8 @@
+package com.example.tetris;
+
 import java.awt.Color;
-import Enum.TetrominoType;
-import Interfaces.CellInterface;
+import com.example.tetris.Enum.TetrominoType;
+import com.example.tetris.Interfaces.CellInterface;
 
 
 /**
@@ -31,6 +33,7 @@ public class Cell {
      * getter of the cell color
      * @return the color of the cell
      */
+
     public Color getColor(){
         return color;
     }

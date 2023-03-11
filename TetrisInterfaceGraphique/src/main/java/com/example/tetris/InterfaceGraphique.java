@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 public class InterfaceGraphique extends Application {
 
 
-    Game game = new Game(true);
+    Game game = new Game();
 
     TetrisBoard tetrisBoard = new TetrisBoard();
     Cell[][] grid ;

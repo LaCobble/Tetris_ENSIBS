@@ -1,5 +1,7 @@
-import Enum.TetrominoType;
-import Interfaces.TetrominoInterface;
+package com.example.tetris;
+
+import com.example.tetris.Enum.TetrominoType;
+import com.example.tetris.Interfaces.TetrominoInterface;
 
 import java.awt.*;
 

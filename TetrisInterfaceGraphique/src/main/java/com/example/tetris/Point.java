@@ -1,4 +1,6 @@
-import Interfaces.PointInterface;
+package com.example.tetris;
+
+import com.example.tetris.Interfaces.PointInterface;
 
 /**
  *

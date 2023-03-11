@@ -1,20 +1,20 @@
-package Interfaces;
+package com.example.tetris.Interfaces;
 
-import Enum.TetrominoType;
-
+import com.example.tetris.Enum.TetrominoType;
+import com.example.tetris.Point;
 import java.awt.*;
 
 public interface TetrominoInterface {
 
-    PointInterface[] canMoveLeft();
+    Point[] canMoveLeft();
 
-    PointInterface[] canMoveRight();
+    Point[] canMoveRight();
 
-    PointInterface[] canMoveDown();
+    Point[] canMoveDown();
 
-    PointInterface[] canRotateClockwise();
+    Point[] canRotateClockwise();
 
-    PointInterface[] canRotateCounterClockwise();
+    Point[] canRotateCounterClockwise();
 
     void moveLeft();
 

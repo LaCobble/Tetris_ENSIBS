@@ -1,6 +1,6 @@
-package Interfaces;
+package com.example.tetris.Interfaces;
 
-import Enum.TetrominoType;
+import com.example.tetris.Tetromino;
 
 
 
@@ -18,9 +18,9 @@ public interface TetrisBoardInterface {
 
     int generationBalancedRandomNumbers();
 
-    TetrominoInterface getActualTetromino();
+    Tetromino getActualTetromino();
 
-    TetrominoInterface getNextTetromino();
+    Tetromino getNextTetromino();
 
     void setTetrominoOrder();
     void aside();

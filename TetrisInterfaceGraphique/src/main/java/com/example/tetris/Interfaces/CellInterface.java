@@ -1,4 +1,4 @@
-package Interfaces;
+package com.example.tetris.Interfaces;
 
 import java.awt.*;
 
