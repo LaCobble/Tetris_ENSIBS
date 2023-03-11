@@ -1,8 +1,6 @@
-package com.example.tetris;
-
 import java.awt.Color;
 import Enum.TetrominoType;
-import com.example.tetris.Interfaces.CellInterface;
+import Interfaces.CellInterface;
 
 
 /**

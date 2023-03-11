@@ -1,7 +1,5 @@
-package com.example.tetris;
-
 import java.awt.Color;
-import com.example.tetris.Interfaces.BlockInterface;
+import Interfaces.BlockInterface;
 
 /**
  *

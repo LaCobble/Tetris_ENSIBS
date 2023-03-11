@@ -1,10 +1,8 @@
-package com.example.tetris.Interfaces;
+package Interfaces;
 
 import java.awt.*;
 
 public interface PointInterface {
-    Integer getX();
-    Integer getY();
-    Point getPosition();
-    Integer setPosition();
+    int getX();
+    int getY();
 }

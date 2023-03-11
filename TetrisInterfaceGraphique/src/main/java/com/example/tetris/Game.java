@@ -1,5 +1,3 @@
-package com.example.tetris;
-
 import java.util.*;
 import java.io.*;
 
@@ -12,10 +10,6 @@ public class Game {
     private boolean isRunning;
     private LevelManager instance = LevelManager.getInstance();
 
-    public Game(Boolean isRunning){
-        this.isRunning = isRunning;
-    }
-
     /**
      * This method is used to start the game
      */
@@ -23,9 +17,26 @@ public class Game {
         // PreCondition : The game is not running
         if (!isRunning) {
             // Initialize the Board and generate the Tetrominoes
-            tetrisBoard = new TetrisBoard();
-            //currentTetromino = tetrisBoard.getActualTetromino();
-            tetrisBoard.addTetrominoToGrid(tetrisBoard.getNextTetromino());
+            tetrisBoard = TetrisBoard.getInstance();
+            Tetromino currentTetromino = tetrisBoard.getActualTetromino();
+            tetrisBoard.addTetrominoToGrid(currentTetromino);
+            for (int x=0;x<10;x++){
+                for (int y=0; y<20;y++){
+                    System.out.print(tetrisBoard.getGrid().getCell(x, y));
+                }
+                System.out.println();
+            }
+            while (currentTetromino.canMoveDown() == null) {}
+                currentTetromino = tetrisBoard.getActualTetromino();
+                tetrisBoard.addTetrominoToGrid(currentTetromino);
+                /** Display on terminal, we don't really need it
+                for (int x=0;x<10;x++){
+                    for (int y=0; y<20;y++){
+                        System.out.print(tetrisBoard.getGrid()[x][y]);
+                    }
+                    System.out.println();
+                }
+                 */
 
             isRunning = true;
         }
@@ -48,11 +59,11 @@ public class Game {
     /**
      * This method is used to check if the game ended, and displays the score
      */
-    public void end() {
+    public void end(Game game) {
         // Precondition: The game is running
         assert(isRunning);
-        Tetromino current = tetrisBoard.getActualTetromino();
-        if ((current.canMoveDown() == false) && (current.canMoveDown() == false) && (current.canMoveDown() == false)) {
+        Tetromino currentTetromino = game.tetrisBoard.getActualTetromino();
+        if ((currentTetromino.canMoveDown() == null) && (currentTetromino.canMoveDown() == null) && (currentTetromino.canMoveDown() == null)) {
             isRunning = false;
             // Display final score
             System.out.println("Final Score: " + score);
@@ -138,9 +149,4 @@ public class Game {
     public void setisRunning(Boolean bool){
         this.isRunning = bool;
     }
-
-    public TetrisBoard getTetrisBoard(){
-        return tetrisBoard;
-    }
-
 }

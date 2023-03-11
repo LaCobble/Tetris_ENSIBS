@@ -1,5 +1,3 @@
-package com.example.tetris;
-
 /**
  *
  * @author Cyberlog - Groupe 2

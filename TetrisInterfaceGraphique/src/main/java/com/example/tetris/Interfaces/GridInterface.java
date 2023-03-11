@@ -1,4 +1,4 @@
-package com.example.tetris.Interfaces;
+package Interfaces;
 
 public interface GridInterface {
     public CellInterface[][] Grid(int[] dimension);

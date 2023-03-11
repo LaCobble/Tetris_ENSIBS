@@ -1,4 +1,4 @@
-package com.example.tetris.Interfaces;
+package Interfaces;
 
 public interface MenuInterface {
     void show();
