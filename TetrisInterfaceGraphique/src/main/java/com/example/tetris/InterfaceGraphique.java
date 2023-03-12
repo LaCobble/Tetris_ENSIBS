@@ -108,26 +108,20 @@
 
             Timeline gameTimeline = new Timeline(
                     new KeyFrame(Duration.millis(500), event -> {
+                        Tetromino oldTetromino = new Tetromino(game.getCurrentTetromino());
                         // If current tetromino cannot move down
                         if (!game.getCurrentTetromino().moveDown()) {
                             // Create new tetromino at top of the screen
                             game.replaceCurrentTetromino();
 
                         } else {
-                            Tetromino oldTetromino = new Tetromino(game.getCurrentTetromino());
                             game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
                         }
 
                         // Line deletion
-                        int[] lineChecker = game.getTetrisBoard().checkLineCompletion();
-                        for (int i = 0; i < lineChecker.length; i++) {
-                            if (lineChecker[i] == 1) {
-                                game.getTetrisBoard().clearLine(i);
-                            }
-                        }
 
                         int c = 0;
-                        for (int i : lineChecker){
+                        for (int i : game.getTetrisBoard().checkLineCompletion()){
                             if (i == 1){
                                 game.getTetrisBoard().clearLine(c);
                             }
