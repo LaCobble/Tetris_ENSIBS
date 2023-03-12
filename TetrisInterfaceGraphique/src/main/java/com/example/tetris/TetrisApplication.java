@@ -5,6 +5,7 @@
     import javafx.application.Application;
     import javafx.scene.Scene;
     import javafx.scene.control.Button;
+    import javafx.scene.control.Label;
     import javafx.scene.image.Image;
     import javafx.scene.image.ImageView;
     import javafx.scene.layout.GridPane;
@@ -13,44 +14,57 @@
     import javafx.scene.input.KeyCode;
     import javafx.scene.shape.Rectangle;
     import javafx.scene.text.Font;
-    import javafx.scene.text.Text;
     import javafx.stage.Stage;
     import javafx.util.Duration;
 
 
-    public class InterfaceGraphique extends Application {
+    public class TetrisApplication extends Application {
 
         Game game;
-        Cell[][] board;
-        GridPane boardPane = new GridPane();
-        int score;
-        Text scoreText = new Text();
 
-        boolean downPressed = false;
-        int c = 0;
+        Cell[][] board;
+
+        GridPane boardPane = new GridPane();
+
+        int score;
+
+        Label scoreLabel;
+
+        int speed;
+
+        Timeline gameTimeline;
+        Timeline displayTimeline;
+        StackPane root;
+        Scene scene;
 
 
         @Override
         public void start(Stage primaryStage) {
-            System.out.println("Start application.");
             game = new Game();
+            speed = Main.getSpeed();
 
-            // Ajout du texte
-            Text text = new Text("SCORE :  " + score);
-            text.setFont(new Font("Arial", 32));
-            text.setFill(Color.WHITE);
-            text.setTranslateX(-400);
-            text.setTranslateY(0);
+            scoreLabel = new Label("SCORE :  " + score);
+            scoreLabel.setFont(new Font("Arial", 32));
+            scoreLabel.setTextFill(Color.WHITE);
+            scoreLabel.setTranslateX(-400);
+            scoreLabel.setTranslateY(0);
 
-            // Ajout du bouton pause
+
             Button btn = new Button("PAUSE");
             btn.setOnAction(e -> {
-                if (game.getisRunning()) {
+                if (game.getIsRunning()) {
+                    btn.setText("RESUME");
+                    gameTimeline.stop();
+                    displayTimeline.stop();
                     game.pause();
                 } else {
+                    btn.setText("PAUSE");
+                    gameTimeline.play();
+                    displayTimeline.play();
                     game.resume();
                 }
             });
+
             btn.setPrefWidth(100);
             btn.setPrefHeight(50);
             btn.setTranslateX(-400);
@@ -60,108 +74,97 @@
             boardPane.setTranslateX(-219);
             boardPane.setTranslateY(+339);
 
-            // Ajout d'un grand rectangle vide
             Rectangle bigRect = new Rectangle(385, 745);
             bigRect.setFill(null);
             bigRect.setStrokeWidth(20);
             bigRect.setStroke(Color.WHITE);
 
-            // Chargement d'une image en fond
-            Image image = new Image("https://images4.alphacoders.com/313/3136.jpg");
+            Image image = new Image("3136.jpg");
             ImageView imageView = new ImageView(image);
             imageView.setFitWidth(1920);
             imageView.setFitHeight(1080);
 
-
-
-            // Ajout de la grille à une scène
-            StackPane root = new StackPane();
+            root = new StackPane();
             root.getChildren().add(0, imageView);
             root.getChildren().add(boardPane);
-            root.getChildren().add(bigRect); // Ajout du rectangle vide à la scène
-            root.getChildren().add(text);
+            root.getChildren().add(bigRect);
+            root.getChildren().add(scoreLabel);
             root.getChildren().add(btn);
 
-            Scene scene = new Scene(root, 1400, 800);
+            scene = new Scene(root, 1400, 800);
 
-
-            Timeline timeline = new Timeline(
-                    new KeyFrame(Duration.millis(100), event -> {
+            displayTimeline = new Timeline(
+                    new KeyFrame(Duration.millis(10), event -> {
                         updateUI();
-
-
-
                     })
             );
 
-            timeline.setCycleCount(Animation.INDEFINITE); // Boucle infinie
-            timeline.play();
-
+            displayTimeline.setCycleCount(Animation.INDEFINITE); // Boucle infinie
+            displayTimeline.play();
 
             // Affichage de la scène
             primaryStage.setTitle("TetrisGame");
-            //primaryStage.setFullScreen(true);
+
+            // primaryStage.setFullScreen(true);
+            primaryStage.getIcons().add(new Image("ico.png"));
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            game.startGame();
+            game.start();
             board = game.getTetrisBoard().getBoard().getGrid();
 
-            Timeline gameTimeline = new Timeline(
-                    new KeyFrame(Duration.millis(1000), event -> {
-
+            gameTimeline = new Timeline(
+                    new KeyFrame(Duration.millis(speed), event -> {
                         Tetromino oldTetromino = new Tetromino(game.getCurrentTetromino());
                         // If current tetromino cannot move down
                         if (!game.getCurrentTetromino().moveDown()) {
+                            // Create new tetromino (can be null if no new
+                            Tetromino newTetromino = game.getTetrisBoard().generateTetromino();
+                            if (newTetromino != null) {
+                                game.setCurrentTetromino(newTetromino);
+                            } else {
+                                game.end();
 
-                            // Create new tetromino at top of the screen
-
-                            game.replaceCurrentTetromino();
-
-                        }
-                        else {
+                            }
+                        } else {
                             game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
                         }
-
-
 
                         // Line deletion
                         int c = 0;
                         for (int i : game.getTetrisBoard().checkLineCompletion()){
                             if (i == 1){
                                 game.getTetrisBoard().clearLine(c);
+                                score += 10;
                             }
                             else {c++;}
                         }
-
                     })
             );
             gameTimeline.setCycleCount(Animation.INDEFINITE);
             gameTimeline.play();
-            // Ajout de la gestion des touches clavier
-            scene.setOnKeyPressed(this::handleInput);
 
+            // Handle key events
+            scene.setOnKeyPressed(this::handleInput);
         }
 
         private void updateUI() {
-            // Mettre à jour le texte
-            scoreText.setText("SCORE :  " + score);
-            // Effacer les anciennes cases
+            // Update score
+            scoreLabel.setText("SCORE :  " + score);
+            // Clear old board
             boardPane.getChildren().clear();
-            // Mettre à jour les éléments de l'interface graphique en fonction de l'état du jeu
-            score = game.getScore();
+            // Update board object
             board = game.getTetrisBoard().getBoard().getGrid();
-
-            // Mettre à jour les cases de la grille
+            // Update UI with the
             for (int i = 0; i < 10; i++) {
                 for (int j = 0; j < 20; j++) {
-                    Rectangle rect = new Rectangle(35, 35);
-                    rect.setTranslateX(j);
-                    rect.setTranslateY(i);
+                    Rectangle cell = new Rectangle(35, 35);
+                    cell.setTranslateX(j);
+                    cell.setTranslateY(i);
                     if (board[i][j] != null) {
-                        rect.setFill(board[i][j].getColor());
+                        cell.setFill(board[i][j].getColor());
                     }
-                    boardPane.add(rect, j, i);
+                    boardPane.add(cell, j, i);
                 }
             }
         }
@@ -171,26 +174,18 @@
             KeyCode keyCode = keyEvent.getCode();
 
             switch (keyCode) {
-                case D :
-                    game.getCurrentTetromino().moveLeft();
-                    break;
-                case Q :
-                    game.getCurrentTetromino().moveRight();
-                    break;
-                case S :
-                    while (game.getCurrentTetromino().moveDown()){}
-                    break;
-                case Z :
-                    game.getCurrentTetromino().rotateClockwise();
-                    break;
-                default:
-                    break;
+                case D -> game.getCurrentTetromino().moveLeft();
+                case Q -> game.getCurrentTetromino().moveRight();
+                case S -> {
+                    while (game.getCurrentTetromino().moveDown()) {}
+                }
+                case Z -> game.getCurrentTetromino().rotateClockwise();
+                default -> {
+                }
             }
-            // Mise à jour de la grille avec le nouveau tetromino
+            // Update the tetromino's position in the board
             game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
-
         }
-
 
         public static void main(String[] args) {
             launch(args);

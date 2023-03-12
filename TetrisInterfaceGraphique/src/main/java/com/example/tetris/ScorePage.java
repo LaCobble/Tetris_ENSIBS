@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -16,9 +15,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  *
@@ -30,7 +26,7 @@ import java.nio.file.Paths;
 public class ScorePage extends Application {
 
         // Sample scores
-        private static final String[][] SCORES = {
+        /* private static final String[][] SCORES = {
                 {"ROOT", "9999"},
                 {"Bob", "1503"},
                 {"Paul", "1345"},
@@ -41,10 +37,18 @@ public class ScorePage extends Application {
                 {"Lucie", "324"},
                 {"Isaac", "100"},
                 {"Lucas", "1"}
-        };
+        }; */
+
+        private static String[][] SCORES;
 
         @Override
         public void start(Stage primaryStage) {
+
+                try {
+                        SCORES = HighScoreManager.readScores();
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
 
                 // create a winner podium with a grid pane and rectangles
                 GridPane podiumPane = new GridPane();
@@ -128,7 +132,7 @@ public class ScorePage extends Application {
 
                 // Create the scene and show the stage
                 Scene scene = new Scene(root, 1200, 350);
-                primaryStage.getIcons().add(new Image("file:C:\\Users\\pierr\\Documents\\Code\\TetrisFX\\src\\main\\java\\com\\example\\tetrisfx\\ico.png"));
+                primaryStage.getIcons().add(new Image("ico.png"));
                 primaryStage.setScene(scene);
                 primaryStage.setTitle("Scores");
                 primaryStage.show();

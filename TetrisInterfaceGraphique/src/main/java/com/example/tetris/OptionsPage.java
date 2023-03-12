@@ -6,32 +6,15 @@
 
 package com.example.tetris;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 import javafx.application.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.*;
 import javafx.geometry.*;
-import javafx.scene.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.*;
 import javafx.scene.Scene;
 
 /**
@@ -42,6 +25,7 @@ import javafx.scene.Scene;
  *
  */
 public class OptionsPage extends Application {
+    String difficulty;
 
     @Override
     public void start(Stage primaryStage) {
@@ -50,15 +34,10 @@ public class OptionsPage extends Application {
         StackPane root = new StackPane();
 
         // Background
-        try(InputStream is = Files.newInputStream(Paths.get("C:\\Users\\pierr\\Documents\\Code\\TetrisFX\\src\\main\\java\\com\\example\\tetrisfx\\BackgroundOption.png"))){
-            ImageView img = new ImageView(new Image(is));
-            img.setFitWidth(400);
-            img.setFitHeight(200);
-            root.getChildren().add(img);
-        }
-        catch(IOException e) {
-            System.out.println("Couldn't load image");
-        }
+        ImageView img = new ImageView(new Image("BackgroundOption.png"));
+        img.setFitWidth(400);
+        img.setFitHeight(200);
+        root.getChildren().add(img);
 
         // Create a VBox to hold the buttons
         VBox buttonBox = new VBox();
@@ -67,12 +46,14 @@ public class OptionsPage extends Application {
 
         // Combo box for level selection "Easy", "Medium", "Hard"
         ComboBox<String> levelComboBox = new ComboBox<>();
-        levelComboBox.getItems().addAll("Easy", "Medium", "Hard");
+        levelComboBox.getItems().addAll("Easy", "Medium", "Hard","GodMode");
         levelComboBox.setValue("Easy");
+        difficulty = levelComboBox.getValue();
 
         // Create a button to go back to the start page
         Button backButton = new Button("Back");
         backButton.setOnAction(e -> {
+            String selectedLevel = levelComboBox.getValue();
             Main main = new Main();
             try {
                 main.start(new Stage());
@@ -81,11 +62,22 @@ public class OptionsPage extends Application {
             }
             Stage stage = (Stage) backButton.getScene().getWindow();
             stage.close();
+        });
 
+        Button CreditButton = new Button("Credit");
+        CreditButton.setOnAction(e -> {
+            CreditPage creditPage = new CreditPage();
+            try {
+                creditPage.start(new Stage());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+            Stage stage = (Stage) CreditButton.getScene().getWindow();
+            stage.close();
         });
 
         // Add the buttons to the VBox
-        buttonBox.getChildren().addAll(levelComboBox, backButton);
+        buttonBox.getChildren().addAll(levelComboBox, CreditButton, backButton);
 
         // Add the VBox to the root node
         root.getChildren().add(buttonBox);
@@ -94,14 +86,36 @@ public class OptionsPage extends Application {
         Scene scene = new Scene(root, 400, 200);
 
         // Set the scene on the primary stage
-        primaryStage.getIcons().add(new Image("file:C:\\Users\\pierr\\Documents\\Code\\TetrisFX\\src\\main\\java\\com\\example\\tetrisfx\\ico.png"));
+        primaryStage.getIcons().add(new Image("ico.png"));
         primaryStage.setScene(scene);
         primaryStage.setTitle("Options");
         primaryStage.show();
 
         // Show the primary stage
         primaryStage.show();
+
     }
+    
+
+    public int getSpeedOnOptionPage(){
+        int result = 1000;
+        switch (difficulty){
+            case "Easy":{
+                result = 1000;
+            }
+            case "Medium":{
+                result = 750;
+            }
+            case "Hard":{
+                result = 500;
+            }
+            case "GodMode":{
+                result =250;
+            }
+        }
+        return result;
+    }
+
 
     public static void main(String[] args) {
         launch(args);

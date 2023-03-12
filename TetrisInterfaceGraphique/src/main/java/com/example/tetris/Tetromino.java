@@ -3,33 +3,40 @@ package com.example.tetris;
 import com.example.tetris.Enum.TetrominoType;
 import com.example.tetris.Interfaces.TetrominoInterface;
 
-
 import javafx.scene.paint.Color;
 
 /**
+ * Tetromino class is used to create a Tetromino object, which is a piece of the game. It is used to create the 7 different pieces of the game.
+ *
+ * <p>
+ * Tetromino attributes:
+ * <ul>
+ *     <li> type : the type of the Tetromino (Z, L, O, S, I, J, T) </li>
+ *     <li> positions : the positions of the Tetromino on the grid </li>
+ *     <li> color : the color of the Tetromino </li>
+ * </ul>
+ * </p>
  *
  * @author Cyberlog - Groupe 2
  * @version 1.0
- * This class is used to create a Tetromino object, which is a piece of the game. It is used to create the 7 different pieces of the game.
- *
  */
 public class Tetromino implements TetrominoInterface {
 
-    // Attributes of the class Tetromino :
-    // - type : the type of the Tetromino (Z, L, O, S, I, J, T)
-    protected TetrominoType type;
-
-    // - positions : the positions of the Tetromino on the grid
-    protected Point[] positions = new Point[4];
-
-    // - rotation : the rotation of the Tetromino
-    protected int rotation = 0;
-
-    // - color : the color of the Tetromino
-    protected Color color;
+    /**
+     * Type of the Tetromino (Z, L, O, S, I, J, T)
+     */    protected TetrominoType type;
 
     /**
-     * This constructor is used to create a Tetromino object.
+     * Positions of the Tetromino on the grid
+     */    protected Point[] positions = new Point[4];
+
+    /**
+     * Color of the Tetromino
+     */    protected Color color;
+
+    /**
+     * Constructs a Tetromino object.
+     *
      * @param type the type of the Tetromino (Z, L, O, S, I, J, T)
      */
     public Tetromino(TetrominoType type) {
@@ -88,10 +95,9 @@ public class Tetromino implements TetrominoInterface {
     }
 
     /**
-
-     This constructor is used to create a clone of a Tetromino object.
-
-     @param original the original Tetromino object to clone
+     * Constructs a new `Tetromino` object as a copy of the specified `Tetromino` object.
+     *
+     * @param original The `Tetromino` object to copy.
      */
     public Tetromino(Tetromino original) {
         this.type = original.type;
@@ -99,86 +105,70 @@ public class Tetromino implements TetrominoInterface {
         for (int i = 0; i < original.positions.length; i++) {
             this.positions[i] = new Point(original.positions[i].getX(), original.positions[i].getY());
         }
-        this.rotation = original.rotation;
         this.color = original.color;
     }
 
     /**
      * Checks if the Tetromino can move left.
-     * If it can, it returns the new coordinates after moving left.
-     * @return the new coordinates if the Tetromino can move left, null otherwise
+     * Returns the new positions of the Tetromino if it can move left, or null if it cannot.
+     *
+     * @return an array of Point objects representing the new positions of the Tetromino if it can move left, or null if it cannot.
      */
     @Override
     public Point[] canMoveLeft() {
         Point[] newPositions = new Point[4];
-
         for (int i = 0; i < positions.length; i++) {
             Point p = positions[i];
-
             int x = p.getX() - 1;
             int y = p.getY();
-
             if (x < 0 ||
-                    (TetrisBoard.getInstance().getBoard().getCell(x, y) != null &&
-                            TetrisBoard.getInstance().getBoard().getCell(x, y).getParentTetromino() != this)) {
-                System.out.println("Tetromino cannot move left.");
+                    (TetrisBoard.getInstance().getBoard().getCell(x, y) != null && TetrisBoard.getInstance().getBoard().getCell(x, y).getParentTetromino() != this)) {
                 return null;
             }
-
             newPositions[i] = new Point(x, y);
         }
-
         return newPositions;
     }
 
-
     /**
      * Checks if the Tetromino can move right.
-     * If it can, it returns the new coordinates after moving right.
-     * @return the new coordinates if the Tetromino can move right, null otherwise
+     * Returns the new positions of the Tetromino if it can move right, or null if it cannot.
+     *
+     * @return an array of Point objects representing the new positions of the Tetromino if it can move right, or null if it cannot.
      */
     @Override
     public Point[] canMoveRight() {
         Point[] newPos = new Point[4];
-
         for (int i = 0; i < positions.length; i++) {
             Point p = positions[i];
-
             int x = p.getX() + 1;
             int y = p.getY();
-
             if (x >= Board.colDimension ||
                     (TetrisBoard.getInstance().getBoard().getCell(x, y) != null &&
                             TetrisBoard.getInstance().getBoard().getCell(x, y).getParentTetromino() != this)) {
-                System.out.println("Tetromino cannot move right.");
                 return null;
             }
-
             newPos[i] = new Point(x, y);
         }
-
         return newPos;
     }
 
-
     /**
      * Checks if the Tetromino can move down.
-     * If it can, it returns the new coordinates after moving down.
-     * @return the new coordinates if the Tetromino can move down, null otherwise
+     * Returns the new positions of the Tetromino if it can move down, or null if it cannot.
+     *
+     * @return an array of Point objects representing the new positions of the Tetromino if it can move down, or null if it cannot.
      */
     @Override
     public Point[] canMoveDown() {
         Point[] newPos = new Point[4];
         for (int i = 0; i < positions.length; i++) {
             Point p = positions[i];
-
             int x = p.getX();
             int y = p.getY() + 1;
-
-            if (y >= Board.lineDimension ||
-                    (TetrisBoard.getInstance().getBoard().getCell(x, y) != null &&
-                            TetrisBoard.getInstance().getBoard().getCell(x, y).getParentTetromino() != this)) {
-                System.out.println("Tetromino cannot move down.");
+            if (y >= Board.lineDimension  ||
+                    ((TetrisBoard.getInstance().getBoard().getCell(x, y) != null &&
+                            TetrisBoard.getInstance().getBoard().getCell(x, y).getParentTetromino() != this))) {
                 return null;
             }
             newPos[i] = new Point(x, y);
@@ -186,81 +176,39 @@ public class Tetromino implements TetrominoInterface {
         return newPos;
     }
 
-
     /**
-     * This method checks if the Tetromino can rotate clockwise.
-     * If it can, it returns the new coordinates after rotation.
-     * @return the new coordinates if the Tetromino can rotate clockwise, null otherwise
+     * Checks if the Tetromino can rotate clockwise.
+     * Returns the new positions of the Tetromino if it can move rotate clockwise, or null if it cannot.
+     *
+     * @return an array of Point objects representing the new positions of the Tetromino if it can rotate clockwise, or null if it cannot.
      */
     @Override
     public Point[] canRotateClockwise() {
         Point center = positions[1];
         Point[] newPositions = new Point[4];
-
         for (int i = 0; i < positions.length; i++) {
             Point p = positions[i];
-
             if (p == center) {
                 newPositions[i] = center;
                 continue;
             }
-
             int newX = center.getX() - center.getY() + p.getY();
             int newY = center.getY() + center.getX() - p.getX();
-
             if (newX < 0 || newX >= Board.colDimension ||
                     newY < 0 || newY >= Board.lineDimension ||
                     (TetrisBoard.getInstance().getBoard().getCell(newX, newY) != null &&
                             TetrisBoard.getInstance().getBoard().getCell(newX, newY).getParentTetromino() != this)) {
-                System.out.println("Tetromino cannot rotate clockwise.");
                 return null;
             }
-
             newPositions[i] = new Point(newX, newY);
         }
-
         return newPositions;
     }
 
-
     /**
-     * This method checks if the Tetromino can rotate counter-clockwise.
-     * If it can, it returns the new coordinates after rotation.
-     * @return the new coordinates if the Tetromino can rotate counter-clockwise, null otherwise
-     */
-    @Override
-    public Point[] canRotateCounterClockwise() {
-        Point center = positions[1];
-        Point[] newPos = new Point[4];
-
-        for (int i = 0; i < positions.length; i++) {
-            Point p = positions[i];
-
-            if (p == center) {
-                newPos[i] = center;
-                continue;
-            }
-
-            int newX = center.getX() + center.getY() - p.getY();
-            int newY = center.getY() - center.getX() + p.getX();
-
-            if (newX < 0 || newX >= Board.colDimension ||
-                    newY < 0 || newY >= Board.lineDimension ||
-                    (TetrisBoard.getInstance().getBoard().getCell(newX, newY) != null &&
-                            TetrisBoard.getInstance().getBoard().getCell(newX, newY).getParentTetromino() != this)) {
-                System.out.println("Tetromino cannot rotate counterclockwise.");
-
-                return null;
-            }
-
-            newPos[i] = new Point(newX, newY);
-        }
-
-        return newPos;
-    }
-
-    /**
-     * This method is used to move the Tetromino to the left.
+     * Attempts to move the tetromino one cell to the left.
+     *
+     * @return true if the tetromino was moved successfully, false otherwise.
      */
     @Override
     public boolean moveLeft() {
@@ -273,7 +221,9 @@ public class Tetromino implements TetrominoInterface {
     }
 
     /**
-     * This method is used to move the Tetromino to the right.
+     * Attempts to move the tetromino one cell to the right.
+     *
+     * @return true if the tetromino was moved successfully, false otherwise.
      */
     @Override
     public boolean moveRight() {
@@ -286,22 +236,24 @@ public class Tetromino implements TetrominoInterface {
     }
 
     /**
-     * This method is used to move the Tetromino down.
+     * Attempts to move the tetromino one cell downwards.
+     *
+     * @return true if the tetromino was moved successfully, false otherwise.
      */
     @Override
     public boolean moveDown() {
         Point[] newPos = canMoveDown();
         if (newPos != null) {
             positions = newPos;
-            //System.out.println("New x  " + positions[0].getX());
-            //System.out.println("New y  " + positions[0].getY());
             return true;
         }
         return false;
     }
 
     /**
-     * This method is used to rotate the Tetromino clockwise.
+     * Attempts to rotate the tetromino.
+     *
+     * @return true if the tetromino was rotated successfully, false otherwise.
      */
     @Override
     public boolean rotateClockwise() {
@@ -314,48 +266,18 @@ public class Tetromino implements TetrominoInterface {
     }
 
     /**
-     * This method is used to rotate the Tetromino counterclockwise.
-     */
-    @Override
-    public boolean rotateCounterClockwise() {
-        Point[] newPos = canRotateCounterClockwise();
-        if (newPos != null) {
-            positions = newPos;
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * This method is used to get the positions of the Tetromino.
-     * @return the positions of the Tetromino
-     */
-    @Override
-    public TetrominoType getTetrominoType() {
-        return type;
-    }
-
-    /**
-     * This method is used to get the color of the Tetromino.
+     * Returns the color of this tetromino.
      *
-     * @return the color of the Tetromino
+     * @return the color of this tetromino
      */
     public Color getColor(){
         return color;
     }
 
     /**
-     * This method is used to get the rotation of the Tetromino.
-     * @return the rotation of the Tetromino
-     */
-    @Override
-    public int getRotation() {
-        return rotation;
-    }
-
-    /**
-     * This method is used to get the positions of the Tetromino.
-     * @return the positions of the Tetromino
+     * Returns an array of Point objects representing the current positions of the tetromino blocks.
+     *
+     * @return an array of Point objects representing the current positions of the tetromino blocks.
      */
     public Point[] getPositions() {
         return positions;

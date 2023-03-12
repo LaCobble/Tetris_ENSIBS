@@ -1,8 +1,10 @@
 package com.example.tetris.Interfaces;
 
-import java.awt.*;
+import com.example.tetris.Tetromino;
+import javafx.scene.paint.Color;
 
 public interface CellInterface {
     Color getColor();
-    Boolean getSate();
+
+    Tetromino getParentTetromino();
 }

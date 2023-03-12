@@ -1,19 +1,42 @@
 package com.example.tetris;
 
-import java.util.*;
-import java.io.*;
+import com.example.tetris.Interfaces.GameInterface;
 
-public class Game {
-    private HighScoreManager manager;
-    private TetrisBoard tetrisBoard;
+/**
+ * Game class represents the game itself. It has a TetrisBoard, a current Tetromino, and methods to start, pause, end and resume the game.
+ * It also has getters and setters for its attributes.
+ *
+ * <p>
+ * Game attributes:
+ * <ul>
+ *      <li> tetrisBoard : the TetrisBoard of the game </li>
+ *      <li> currentTetromino : the current Tetromino in the game </li>
+ *      <li> isRunning : boolean to see if the game is running </li>
+ * </ul>
+ * </p>
+ * @author Cyberlog - Groupe 2
+ * @version 1.0
+ */
+public class Game implements GameInterface {
+
+    /**
+     * The TetrisBoard of the game.
+     */
+    private final TetrisBoard tetrisBoard;
+
+    /**
+     * The current Tetromino in the game.
+     */
     private Tetromino currentTetromino;
-    private Tetromino nextTetromino;
-    private int score;
-    private int highScore;
+
+    /**
+     * Boolean to see if the game is running.
+     */
     private boolean isRunning;
-    private LevelManager instance = LevelManager.getInstance();
 
-
+    /**
+     * Constructs a Game object with default values.
+     */
     public Game() {
         isRunning = true;
         tetrisBoard = TetrisBoard.getInstance();
@@ -22,159 +45,67 @@ public class Game {
     /**
      * This method is used to start the game
      */
-    public void startGame() {
-        System.out.println("Game started.");
-
-        // Create first tetromino
-        replaceCurrentTetromino();
-        // Add tetromino to board
+    public void start() {
+        setCurrentTetromino(tetrisBoard.generateTetromino());
         tetrisBoard.addTetrominoToBoard(currentTetromino);
-
-        /*
-        // While game is not finished
-        while (isRunning) {
-            // If current tetromino cannot go down
-            if (!currentTetromino.moveDown()) {
-                // Create new tetromino
-                currentTetromino = tetrisBoard.getActualTetromino();
-                // Add tetromino to board
-                tetrisBoard.addTetrominoToBoard(currentTetromino);
-            }
-        }
-         */
-
     }
 
     /**
      * This method is used to pause the game
      */
     public void pause() {
-        // PreCondition : The game is running
-        assert(isRunning);
-        instance.setSpeed(0);
         isRunning = false;
-        // Post-condition: The game is no longer running
-        assert(!isRunning);
     }
 
     /**
-     * This method is used to check if the game ended, and displays the score
+     * This method is used to check if the game ended
      */
-    public void end(Game game) {
-        // Precondition: The game is running
-        assert(isRunning);
-        Tetromino currentTetromino = game.tetrisBoard.generateTetromino();
-        if ((currentTetromino.canMoveDown() == null) && (currentTetromino.canMoveDown() == null) && (currentTetromino.canMoveDown() == null)) {
-            isRunning = false;
-            // Display final score
-            System.out.println("Final Score: " + score);
-            // Precondition: The game is no longer running
-            assert (!isRunning);
-        }
+    public void end() {
+        isRunning = false;
+        System.out.println("Game Over");
     }
-
-    /**
-     * This method is used to update the highest score
-     */
-    public void updateHighScore() {
-        if (score > highScore) {
-            highScore = score;
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter your name for the high score list:");
-            String name = scanner.nextLine().trim();
-            scanner.close();
-            try {
-                List<String> highScores = HighScoreManager.readScores();
-                highScores.add(name + "," + highScore);
-                highScores.sort((s1, s2) -> Integer.compare(Integer.parseInt(s2.split(",")[1]), Integer.parseInt(s1.split(",")[1])));
-                highScore = Integer.parseInt(highScores.get(0).split(",")[1]);
-                HighScoreManager.writeScore(name, highScore);
-            } catch (IOException e) {
-                System.err.println("Error reading/writing high score: " + e.getMessage());
-            }
-        }
-    }
-
-    /**
-     * This method is used to display the highscore
-     */
-    public void displayHighScore() {
-        System.out.println("High Score: " + highScore);
-    }
-
 
     /**
      * This method is used to restart the game
+     *
      */
-    public void resume(){
-        // Precondition: The game is not running
-        assert(!isRunning);
+    public void resume() {
         isRunning = true;
-        instance.setSpeed(1);
-        // Post-condition: The game is running
-        assert(isRunning);
-    }
-
-    /**
-     * This method is used to display the credits
-     */
-    public void displayCredits(){
-        System.out.println("This game was created by this awesome squad:");
-        System.out.println("Maucourt Pierre-Yves - Latour Morgan - Saudemont Thomas - Ben Nasrallah Ahmed");
-    }
-
-    /**
-     * This method is used to set a score
-     */
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    /**
-     * This method is used to get a score
-     */
-    public int getScore() {
-        return score;
     }
 
     /**
      * This method is used to see if the game is running
+     *
+     * @return isRunning
      */
-    public Boolean getisRunning() {
+    public Boolean getIsRunning() {
         return isRunning;
     }
 
     /**
-     * This method is used to change the state of the game
+     * This method is the getter of the tetrisBoard
+     *
+     * @return tetrisBoard
      */
-    public void setisRunning(Boolean bool){
-        this.isRunning = bool;
-    }
-
     public TetrisBoard getTetrisBoard() {
         return tetrisBoard;
     }
 
+    /**
+     * This method is the getter of the currentTetromino
+     *
+     * @return currentTetromino
+     */
     public Tetromino getCurrentTetromino() {
         return currentTetromino;
     }
 
-    public void replaceCurrentTetromino(){
-
-        if (((this.getCurrentTetromino()!= null) && (this.getCurrentTetromino().canMoveDown() == null)) || (this.getCurrentTetromino()== null) ){
-            currentTetromino = tetrisBoard.generateTetromino();
-            System.out.println("Current tetromino replaced");
-
-        }
-
-    }
-
-    public void setNextTetromino(){
-        nextTetromino = tetrisBoard.getNextTetromino();
-    }
-
-    public void swapTetromino(){
-        currentTetromino = nextTetromino;
-        setNextTetromino();
+    /**
+     * This method is the setter of the currentTetromino
+     *
+     * @param t
+     */
+    public void setCurrentTetromino(Tetromino t) {
+        currentTetromino = t;
     }
 }
