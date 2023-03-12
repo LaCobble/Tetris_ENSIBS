@@ -31,6 +31,8 @@
         int score;
         Text scoreText = new Text();
 
+        boolean downPressed = false;
+        int c = 0;
 
         @Override
         public void start(Stage primaryStage) {
@@ -92,6 +94,7 @@
                         updateUI();
 
 
+
                     })
             );
 
@@ -111,11 +114,18 @@
             Timeline gameTimeline = new Timeline(
                     new KeyFrame(Duration.millis(500), event -> {
                         Tetromino oldTetromino = new Tetromino(game.getCurrentTetromino());
-                        if (!game.getCurrentTetromino().moveDown()) {
-                            game.setCurrentTetromino();
-                        } else {
-                            game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
+
+
+                        if (!downPressed) {
+                            if (!game.getCurrentTetromino().moveDown()) {
+                                game.setCurrentTetromino();
+                            } else {
+                                game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
+                            }
                         }
+
+                        else { downPressed = false;}
+
                         //game.getTetrisBoard().clearLine(game.getTetrisBoard().checkLineCompletion(game.getTetrisBoard().getBoard().getGrid()));
 
 
@@ -158,21 +168,28 @@
             switch (keyCode) {
                 case D :
                     game.getCurrentTetromino().moveLeft();
+                    game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
                     break;
                 case Q :
                     game.getCurrentTetromino().moveRight();
+                    game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
                     break;
                 case S :
                     while (game.getCurrentTetromino().moveDown());
+                    game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
+                    game.setCurrentTetromino();
+                    downPressed = true;
                     break;
                 case Z :
                     game.getCurrentTetromino().rotateClockwise();
+                    game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
                     break;
                 default:
                     break;
             }
             // Mise à jour de la grille avec le nouveau tetromino
-            game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
+
+
         }
 
 
