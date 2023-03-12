@@ -25,7 +25,7 @@ public class Game {
         System.out.println("Game started.");
 
         // Create first tetromino
-        setCurrentTetromino();
+        replaceCurrentTetromino();
         // Add tetromino to board
         tetrisBoard.addTetrominoToBoard(currentTetromino);
 
@@ -62,7 +62,7 @@ public class Game {
     public void end(Game game) {
         // Precondition: The game is running
         assert(isRunning);
-        Tetromino currentTetromino = game.tetrisBoard.getActualTetromino();
+        Tetromino currentTetromino = game.tetrisBoard.generateTetromino();
         if ((currentTetromino.canMoveDown() == null) && (currentTetromino.canMoveDown() == null) && (currentTetromino.canMoveDown() == null)) {
             isRunning = false;
             // Display final score
@@ -157,12 +157,16 @@ public class Game {
     public Tetromino getCurrentTetromino() {
         return currentTetromino;
     }
-    public void setCurrentTetromino(){
-        currentTetromino = tetrisBoard.getActualTetromino();
+
+    public void replaceCurrentTetromino(){
+        currentTetromino = tetrisBoard.generateTetromino();
+        System.out.println("Current tetromino replaced");
     }
+
     public void setNextTetromino(){
         nextTetromino = tetrisBoard.getNextTetromino();
     }
+
     public void swapTetromino(){
         currentTetromino = nextTetromino;
         setNextTetromino();

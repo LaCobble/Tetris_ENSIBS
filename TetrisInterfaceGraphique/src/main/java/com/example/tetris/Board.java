@@ -14,11 +14,11 @@ public class Board implements BoardInterface {
     // The grid is a 2D array of cells
     private Cell[][] grid;
 
-    public static int dimensionX = 10;
-    public static int dimensionY = 20;
+    public static int colDimension = 10;
+    public static int lineDimension = 20;
 
     public Board(){
-        grid = new Cell[dimensionX][dimensionY];
+        grid = new Cell[colDimension][lineDimension];
     }
 
     /**
@@ -28,10 +28,16 @@ public class Board implements BoardInterface {
      * @param y The y-coordinate of the cell in the grid.
      */
     public void addCell(Tetromino tetromino,int x, int y ){
-        assert (dimensionX >= x && x >= 0);
-        assert (dimensionY >= y && y >= 0);
+        assert (colDimension >= x && x >= 0);
+        assert (lineDimension >= y && y >= 0);
         grid[x][y] = new Cell(tetromino,x,y);
     }
+
+    public void moveCell(int x, int y, int newX,int newY) {
+        grid[newX][newY] = grid[x][y];
+        deleteCell(x,y);
+    }
+
     public void deleteCell(int x, int y){
         grid[x][y] = null;
     }
@@ -43,8 +49,8 @@ public class Board implements BoardInterface {
      * @return The Cell object at the specified coordinates.
      */
     public Cell getCell(int x, int y) {
-        assert (dimensionX >= x && x >= 0);
-        assert (dimensionY >= y && y >= 0);
+        assert (colDimension >= x && x >= 0);
+        assert (lineDimension >= y && y >= 0);
         return grid[x][y];
     }
 
@@ -54,13 +60,10 @@ public class Board implements BoardInterface {
     }
 
     public int getDimensionX() {
-        return dimensionX;
+        return colDimension;
     }
 
     public int getDimensionY() {
-        return dimensionY;
-    }
-    public void moveCell(int x, int y, int newX,int newY){
-        grid[newX][newY] =grid[x][y];
+        return lineDimension;
     }
 }

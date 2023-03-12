@@ -6,10 +6,6 @@ import com.example.tetris.Interfaces.TetrominoInterface;
 
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
  *
  * @author Cyberlog - Groupe 2
@@ -37,6 +33,7 @@ public class Tetromino implements TetrominoInterface {
      * @param type the type of the Tetromino (Z, L, O, S, I, J, T)
      */
     public Tetromino(TetrominoType type) {
+        this.type = type;
         switch (type) {
             case Z -> {
                 color = Color.RED;
@@ -150,7 +147,7 @@ public class Tetromino implements TetrominoInterface {
             int x = p.getX() + 1;
             int y = p.getY();
 
-            if (x >= Board.dimensionX ||
+            if (x >= Board.colDimension ||
                     (TetrisBoard.getInstance().getBoard().getCell(x, y) != null &&
                             TetrisBoard.getInstance().getBoard().getCell(x, y).getParentTetromino() != this)) {
                 System.out.println("Tetromino cannot move right.");
@@ -171,8 +168,6 @@ public class Tetromino implements TetrominoInterface {
      */
     @Override
     public Point[] canMoveDown() {
-        //System.out.println("Old x  " + positions[0].getX());
-        //System.out.println("Old y  " + positions[0].getY());
         Point[] newPos = new Point[4];
         for (int i = 0; i < positions.length; i++) {
             Point p = positions[i];
@@ -180,7 +175,7 @@ public class Tetromino implements TetrominoInterface {
             int x = p.getX();
             int y = p.getY() + 1;
 
-            if (y >= Board.dimensionY ||
+            if (y >= Board.lineDimension ||
                     (TetrisBoard.getInstance().getBoard().getCell(x, y) != null &&
                             TetrisBoard.getInstance().getBoard().getCell(x, y).getParentTetromino() != this)) {
                 System.out.println("Tetromino cannot move down.");
@@ -214,8 +209,8 @@ public class Tetromino implements TetrominoInterface {
             int newX = center.getX() - center.getY() + p.getY();
             int newY = center.getY() + center.getX() - p.getX();
 
-            if (newX < 0 || newX >= Board.dimensionX ||
-                    newY < 0 || newY >= Board.dimensionY ||
+            if (newX < 0 || newX >= Board.colDimension ||
+                    newY < 0 || newY >= Board.lineDimension ||
                     (TetrisBoard.getInstance().getBoard().getCell(newX, newY) != null &&
                             TetrisBoard.getInstance().getBoard().getCell(newX, newY).getParentTetromino() != this)) {
                 System.out.println("Tetromino cannot rotate clockwise.");
@@ -250,8 +245,8 @@ public class Tetromino implements TetrominoInterface {
             int newX = center.getX() + center.getY() - p.getY();
             int newY = center.getY() - center.getX() + p.getX();
 
-            if (newX < 0 || newX >= Board.dimensionX ||
-                    newY < 0 || newY >= Board.dimensionY ||
+            if (newX < 0 || newX >= Board.colDimension ||
+                    newY < 0 || newY >= Board.lineDimension ||
                     (TetrisBoard.getInstance().getBoard().getCell(newX, newY) != null &&
                             TetrisBoard.getInstance().getBoard().getCell(newX, newY).getParentTetromino() != this)) {
                 System.out.println("Tetromino cannot rotate counterclockwise.");

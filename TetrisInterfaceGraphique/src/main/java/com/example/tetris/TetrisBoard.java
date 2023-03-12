@@ -62,40 +62,41 @@ public class TetrisBoard implements TetrisBoardInterface {
      * @return 1 if the line is completed
      */
     @Override
-    public int checkLineCompletion(Cell[][] grid) {
-        int r = 0;
-        for (int y = 0; y < Board.dimensionY; y++) {
+    public int[] checkLineCompletion() {
+        int[] r = new int[Board.lineDimension + 1];
+        for (int y = Board.lineDimension - 1; y > 0; y--) {
             int columnCounter = 0;
-            for (int x = 0; x < Board.dimensionX; x++) {
+            for (int x = 0; x < Board.colDimension; x++) {
                 if (grid[x][y] != null) {
                     columnCounter++;
-                } else if (columnCounter == Board.dimensionY) {
-                    r = y;
+                }
+                if (columnCounter == Board.colDimension) {
+                    r[y] = 1;
                 }
             }
         }
         return r;
     }
+
     /**
      * clear a line
      * and goes down 1 all cells
      */
     public void clearLine(int Y) {
-        for (int x = 0; x < Board.dimensionX; x++) {
+        for (int x = 0; x < Board.colDimension; x++) {
             board.deleteCell(x,Y);
-            System.out.println("ligne delete");
-            for (int y = Y; y <= Board.dimensionY; y++) {
+            for (int y = Board.lineDimension - 1; y >= Y; y--) {
                 if (board.getGrid()[x][y] != null) {
-                    board.moveCell(x,y,x,y+1);
+                    board.moveCell(x, y, x, y + 1);
                 }
             }
         }
+        System.out.println("Line " + Y + " deleted.");
     }
 
 
     /**
      * swap
-     *
      * @param A array
      * @param i int
      * @param j int
@@ -142,7 +143,7 @@ public class TetrisBoard implements TetrisBoardInterface {
      * @return the actual tetromino
      */
     @Override
-    public Tetromino getActualTetromino() {
+    public Tetromino generateTetromino() {
         return tetrominoOrder.get(generationBalancedRandomNumbers());
     }
 
