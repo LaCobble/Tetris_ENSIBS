@@ -162,9 +162,6 @@
                 default -> {
                 }
             }
-            // Mise à jour de la grille avec le nouveau tetromino
-
-
         }
 
 
