@@ -10,14 +10,14 @@ public interface TetrisBoardInterface {
 
     void updateGrid(Tetromino oldTetromino, Tetromino newTetromino);
 
-    int checkLineCompletion(Cell[][] grid);
+    int[] checkLineCompletion();
 
     void clearLine(int y);
 
 
     int generationBalancedRandomNumbers();
 
-    Tetromino getActualTetromino();
+    Tetromino generateTetromino();
 
     Tetromino getNextTetromino();
 

@@ -16,11 +16,6 @@
     import javafx.scene.text.Text;
     import javafx.stage.Stage;
     import javafx.util.Duration;
-    import java.awt.event.KeyEvent;
-    import java.awt.event.KeyListener;
-    import javax.swing.JFrame;
-
-
 
 
     public class InterfaceGraphique extends Application {
@@ -113,21 +108,31 @@
 
             Timeline gameTimeline = new Timeline(
                     new KeyFrame(Duration.millis(500), event -> {
-                        Tetromino oldTetromino = new Tetromino(game.getCurrentTetromino());
+                        // If current tetromino cannot move down
+                        if (!game.getCurrentTetromino().moveDown()) {
+                            // Create new tetromino at top of the screen
+                            game.replaceCurrentTetromino();
 
+                        } else {
+                            Tetromino oldTetromino = new Tetromino(game.getCurrentTetromino());
+                            game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
+                        }
 
-                        if (!downPressed) {
-                            if (!game.getCurrentTetromino().moveDown()) {
-                                game.setCurrentTetromino();
-                            } else {
-                                game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
+                        // Line deletion
+                        int[] lineChecker = game.getTetrisBoard().checkLineCompletion();
+                        for (int i = 0; i < lineChecker.length; i++) {
+                            if (lineChecker[i] == 1) {
+                                game.getTetrisBoard().clearLine(i);
                             }
                         }
 
-                        else { downPressed = false;}
-
-                        //game.getTetrisBoard().clearLine(game.getTetrisBoard().checkLineCompletion(game.getTetrisBoard().getBoard().getGrid()));
-
+                        int c = 0;
+                        for (int i : lineChecker){
+                            if (i == 1){
+                                game.getTetrisBoard().clearLine(c);
+                            }
+                            else {c++;}
+                        }
 
                     })
             );
@@ -175,10 +180,9 @@
                     game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
                     break;
                 case S :
-                    while (game.getCurrentTetromino().moveDown());
+                    while (game.getCurrentTetromino().moveDown()){}
                     game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
-                    game.setCurrentTetromino();
-                    downPressed = true;
+                    game.replaceCurrentTetromino();
                     break;
                 case Z :
                     game.getCurrentTetromino().rotateClockwise();
