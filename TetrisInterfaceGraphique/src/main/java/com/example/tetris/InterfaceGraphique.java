@@ -29,6 +29,7 @@
         boolean downPressed = false;
         int c = 0;
 
+
         @Override
         public void start(Stage primaryStage) {
             System.out.println("Start application.");
@@ -107,19 +108,24 @@
             board = game.getTetrisBoard().getBoard().getGrid();
 
             Timeline gameTimeline = new Timeline(
-                    new KeyFrame(Duration.millis(500), event -> {
+                    new KeyFrame(Duration.millis(1000), event -> {
+
                         Tetromino oldTetromino = new Tetromino(game.getCurrentTetromino());
                         // If current tetromino cannot move down
                         if (!game.getCurrentTetromino().moveDown()) {
+
                             // Create new tetromino at top of the screen
+
                             game.replaceCurrentTetromino();
 
-                        } else {
+                        }
+                        else {
                             game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
                         }
 
-                        // Line deletion
 
+
+                        // Line deletion
                         int c = 0;
                         for (int i : game.getTetrisBoard().checkLineCompletion()){
                             if (i == 1){
@@ -167,26 +173,21 @@
             switch (keyCode) {
                 case D :
                     game.getCurrentTetromino().moveLeft();
-                    game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
                     break;
                 case Q :
                     game.getCurrentTetromino().moveRight();
-                    game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
                     break;
                 case S :
                     while (game.getCurrentTetromino().moveDown()){}
-                    game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
-                    game.replaceCurrentTetromino();
                     break;
                 case Z :
                     game.getCurrentTetromino().rotateClockwise();
-                    game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
                     break;
                 default:
                     break;
             }
             // Mise à jour de la grille avec le nouveau tetromino
-
+            game.getTetrisBoard().updateGrid(oldTetromino, game.getCurrentTetromino());
 
         }
 

@@ -31,6 +31,7 @@ public class TetrisBoard implements TetrisBoardInterface {
 
     private static TetrisBoard instance;
 
+
     public TetrisBoard() {
         board = new Board();
         grid = new Board().getGrid();
@@ -67,7 +68,7 @@ public class TetrisBoard implements TetrisBoardInterface {
         for (int y = Board.lineDimension - 1; y > 0; y--) {
             int columnCounter = 0;
             for (int x = 0; x < Board.colDimension; x++) {
-                if (grid[x][y] != null) {
+                if (getBoard().getGrid()[x][y] != null) {
                     columnCounter++;
                 }
                 if (columnCounter == Board.colDimension) {
@@ -83,12 +84,11 @@ public class TetrisBoard implements TetrisBoardInterface {
      * and goes down 1 all cells
      */
     public void clearLine(int Y) {
+        System.out.println("ok");
         for (int x = 0; x < Board.colDimension; x++) {
             board.deleteCell(x,Y);
-            for (int y = Board.lineDimension - 1; y >= Y; y--) {
-                if (board.getGrid()[x][y] != null) {
-                    board.moveCell(x, y, x, y + 1);
-                }
+            for (int y = Y ; y >= 1; y--){
+            board.moveCell(x,y-1,x,y);
             }
         }
         System.out.println("Line " + Y + " deleted.");
@@ -168,6 +168,7 @@ public class TetrisBoard implements TetrisBoardInterface {
             Point point = tetromino.positions[i];
             board.addCell(tetromino, point.getX(), point.getY());
         }
+
     }
 
     public Board getBoard(){

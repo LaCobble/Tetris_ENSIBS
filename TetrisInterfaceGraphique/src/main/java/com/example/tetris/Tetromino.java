@@ -181,7 +181,6 @@ public class Tetromino implements TetrominoInterface {
                 System.out.println("Tetromino cannot move down.");
                 return null;
             }
-
             newPos[i] = new Point(x, y);
         }
         return newPos;
@@ -250,6 +249,7 @@ public class Tetromino implements TetrominoInterface {
                     (TetrisBoard.getInstance().getBoard().getCell(newX, newY) != null &&
                             TetrisBoard.getInstance().getBoard().getCell(newX, newY).getParentTetromino() != this)) {
                 System.out.println("Tetromino cannot rotate counterclockwise.");
+
                 return null;
             }
 

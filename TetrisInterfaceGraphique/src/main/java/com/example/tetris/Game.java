@@ -13,6 +13,7 @@ public class Game {
     private boolean isRunning;
     private LevelManager instance = LevelManager.getInstance();
 
+
     public Game() {
         isRunning = true;
         tetrisBoard = TetrisBoard.getInstance();
@@ -159,8 +160,13 @@ public class Game {
     }
 
     public void replaceCurrentTetromino(){
-        currentTetromino = tetrisBoard.generateTetromino();
-        System.out.println("Current tetromino replaced");
+
+        if (((this.getCurrentTetromino()!= null) && (this.getCurrentTetromino().canMoveDown() == null)) || (this.getCurrentTetromino()== null) ){
+            currentTetromino = tetrisBoard.generateTetromino();
+            System.out.println("Current tetromino replaced");
+
+        }
+
     }
 
     public void setNextTetromino(){

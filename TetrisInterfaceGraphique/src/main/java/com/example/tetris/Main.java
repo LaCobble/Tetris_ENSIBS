@@ -6,7 +6,7 @@
  *
  */
 
-package com.example.tetrisfx;
+package com.example.tetris;
 
 import java.io.IOException;
 import java.io.InputStream;
