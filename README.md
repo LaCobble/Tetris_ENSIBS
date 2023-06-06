@@ -42,7 +42,11 @@ Run the game:
 Use the following controls to play the game:
 
 Left Arrow: Move the Tetrimino left
+
 Right Arrow: Move the Tetrimino right
+
 Down Arrow: Accelerate the Tetrimino's descent
+
 Up Arrow: Rotate the Tetrimino clockwise
+
 P: Pause the game
