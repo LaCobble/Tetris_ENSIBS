@@ -37,9 +37,7 @@ Compile the Java source files:
 
 ## Usage
 
-Run the game:
-
-Use the following controls to play the game:
+Use the following controls to play the game :
 
 Left Arrow: Move the Tetrimino left
 
