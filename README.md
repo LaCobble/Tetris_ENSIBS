@@ -1,1 +1,1 @@
-![Tetris](IMG/Tetris.png)
+![Tetris](img/Tetris.png)
