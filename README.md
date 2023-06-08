@@ -48,3 +48,7 @@ Down Arrow: Accelerate the Tetrimino's descent
 Up Arrow: Rotate the Tetrimino clockwise
 
 P: Pause the game
+
+## Contact
+
+Thank you for using the Tetris_ENSIBS application! If you have any questions or need further assistance, please feel free to contact us.
